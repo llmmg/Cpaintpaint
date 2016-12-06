@@ -115,12 +115,14 @@ if __name__ == "__main__":
     ast = parse(prog)
     print(ast)
     compiled = ast.compile()
-    name = os.path.splitext(sys.argv[1])[0] + '.vm'
+    name = os.path.splitext(sys.argv[1])[0]+'.vm'
     outfile = open(name, 'w')
     outfile.write(compiled)
     outfile.close()
 
     print("Wrote output to", name)
 
-    graph = ast.makegraphicaltree()
-    graph.write_pdf(name)
+    # graph = ast.makegraphicaltree()
+    # graph.write_pdf(name)
+    #
+    # print("Wrote pdf tree to", name)
