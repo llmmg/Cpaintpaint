@@ -106,6 +106,22 @@ def compile(self):
     bytecode += "JINZ body%s\n" % counter
     return bytecode
 
+@addToClass(AST.PrintPixelNode)
+def compile(self):
+    bytecode = "img["
+    bytecode += self.children[0]
+    bytecode += ","
+    bytecode += self.children[1]
+    bytecode += "]=["
+    bytecode += self.children[2]
+    bytecode += ","
+    bytecode += self.children[3]
+    bytecode += ","
+    bytecode += self.children[4]
+    bytecode += "]"
+    return bytecode
+
+
 
 if __name__ == "__main__":
     from parser5 import parse

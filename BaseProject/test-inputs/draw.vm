@@ -1,0 +1,9 @@
+PUSHC 10.0
+SET a
+JMP cond1
+body1: PUSHV a
+PRINT
+cond1: PUSHV a
+JINZ body1
+PUSHV a
+PRINT
