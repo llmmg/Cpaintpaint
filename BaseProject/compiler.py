@@ -19,7 +19,9 @@ operations = {
     '/': 'DIV'
 }
 
+
 vars = {}
+
 
 
 def whilecounter():
@@ -64,14 +66,7 @@ def compile(self):
 @addToClass(AST.AssignNode)
 def compile(self):
     bytecode = ""
-    # bytecode += self.children[1].compile()
-    # bytecode += "SET %s\n" % self.children[0].tok
-    name = self.children[0].tok
-    val = self.children[1].compile()
-    vars[name] = val
-    # bytecode += name + "="
-    # bytecode += val
-
+    vars[self.children[0].tok] = self.children[1].compile()
     return bytecode
 
 
@@ -99,11 +94,13 @@ def compile(self):
         # bytecode += self.children[0].compile()
         bytecode += "USUB\n"
     else:
+
         stack = []
         for c in self.children:
             # bytecode += c.compile()
             stack.append(c.compile())
         # bytecode += operations[self.op] + "\n"
+
         if self.op == '-':
             # vars[stack[0]] = float(vars[stack[0]]) - float(stack[1])
             vars[self.children[0].tok] = vars[self.children[0].tok] - stack[1]
@@ -132,6 +129,7 @@ def compile(self):
 
     ##TEST
     # body
+
     # bytecode += "\n---body---: \n"
     while(self.children[0].compile()!=0):
         bytecode += str(self.children[1].compile())
@@ -162,6 +160,7 @@ def compile(self):
     return bytecode
 
 
+
 if __name__ == "__main__":
     from parserPaint import parse
     import sys, os
@@ -170,9 +169,19 @@ if __name__ == "__main__":
     ast = parse(prog)
     print(ast)
     compiled = ast.compile()
-    name = os.path.splitext(sys.argv[1])[0] + '.vm'
+
+    name = os.path.splitext(sys.argv[1])[0]+'.py'
+
     outfile = open(name, 'w')
+    outfile.write("import numpy as np\n")
+    outfile.write("import cv2\n")
+    outfile.write("img = np.zeros((400,300,3), np.uint8)\n")
+
     outfile.write(compiled)
+
+    outfile.write("\n\ncv2.imshow('image',img)\n")
+    outfile.write("cv2.waitKey(0)\n")
+    outfile.write("cv2.destroyAllWindows()\n")
     outfile.close()
 
     print("Wrote output to", name)

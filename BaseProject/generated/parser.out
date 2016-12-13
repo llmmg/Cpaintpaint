@@ -58,17 +58,24 @@ state 0
     (14) assignation -> . IDENTIFIER = expression
     (6) structure -> . WHILE expression { programme }
 
-    PRINT           shift and go to state 1
-    PRINTPIXEL      shift and go to state 8
-    IDENTIFIER      shift and go to state 5
-    WHILE           shift and go to state 7
+    PRINT           shift and go to state 2
+    PRINTPIXEL      shift and go to state 1
+    IDENTIFIER      shift and go to state 4
+    WHILE           shift and go to state 6
 
-    assignation                    shift and go to state 6
-    statement                      shift and go to state 3
-    structure                      shift and go to state 2
-    programme                      shift and go to state 4
+    programme                      shift and go to state 5
+    structure                      shift and go to state 7
+    assignation                    shift and go to state 3
+    statement                      shift and go to state 8
 
 state 1
+
+    (7) statement -> PRINTPIXEL . ( expression , expression , expression , expression , expression )
+
+    (               shift and go to state 9
+
+
+state 2
 
     (5) statement -> PRINT . expression
     (8) expression -> . expression ADD_OP expression
@@ -78,46 +85,14 @@ state 1
     (12) expression -> . ( expression )
     (13) expression -> . ADD_OP expression
 
-    NUMBER          shift and go to state 13
-    IDENTIFIER      shift and go to state 10
-    (               shift and go to state 9
-    ADD_OP          shift and go to state 12
+    NUMBER          shift and go to state 11
+    IDENTIFIER      shift and go to state 12
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 10
 
-    expression                     shift and go to state 11
-
-state 2
-
-    (4) statement -> structure .
-
-    ;               reduce using rule 4 (statement -> structure .)
-    $end            reduce using rule 4 (statement -> structure .)
-    }               reduce using rule 4 (statement -> structure .)
-
+    expression                     shift and go to state 14
 
 state 3
-
-    (1) programme -> statement .
-    (2) programme -> statement . ; programme
-
-    $end            reduce using rule 1 (programme -> statement .)
-    }               reduce using rule 1 (programme -> statement .)
-    ;               shift and go to state 14
-
-
-state 4
-
-    (0) S' -> programme .
-
-
-
-state 5
-
-    (14) assignation -> IDENTIFIER . = expression
-
-    =               shift and go to state 15
-
-
-state 6
 
     (3) statement -> assignation .
 
@@ -126,7 +101,20 @@ state 6
     }               reduce using rule 3 (statement -> assignation .)
 
 
-state 7
+state 4
+
+    (14) assignation -> IDENTIFIER . = expression
+
+    =               shift and go to state 15
+
+
+state 5
+
+    (0) S' -> programme .
+
+
+
+state 6
 
     (6) structure -> WHILE . expression { programme }
     (8) expression -> . expression ADD_OP expression
@@ -136,23 +124,35 @@ state 7
     (12) expression -> . ( expression )
     (13) expression -> . ADD_OP expression
 
-    NUMBER          shift and go to state 13
-    IDENTIFIER      shift and go to state 10
-    (               shift and go to state 9
-    ADD_OP          shift and go to state 12
+    NUMBER          shift and go to state 11
+    IDENTIFIER      shift and go to state 12
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 10
 
     expression                     shift and go to state 16
 
+state 7
+
+    (4) statement -> structure .
+
+    ;               reduce using rule 4 (statement -> structure .)
+    $end            reduce using rule 4 (statement -> structure .)
+    }               reduce using rule 4 (statement -> structure .)
+
+
 state 8
 
-    (7) statement -> PRINTPIXEL . ( expression , expression , expression , expression , expression )
+    (1) programme -> statement .
+    (2) programme -> statement . ; programme
 
-    (               shift and go to state 17
+    }               reduce using rule 1 (programme -> statement .)
+    $end            reduce using rule 1 (programme -> statement .)
+    ;               shift and go to state 17
 
 
 state 9
 
-    (12) expression -> ( . expression )
+    (7) statement -> PRINTPIXEL ( . expression , expression , expression , expression , expression )
     (8) expression -> . expression ADD_OP expression
     (9) expression -> . expression MUL_OP expression
     (10) expression -> . NUMBER
@@ -160,41 +160,14 @@ state 9
     (12) expression -> . ( expression )
     (13) expression -> . ADD_OP expression
 
-    NUMBER          shift and go to state 13
-    IDENTIFIER      shift and go to state 10
-    (               shift and go to state 9
-    ADD_OP          shift and go to state 12
+    NUMBER          shift and go to state 11
+    IDENTIFIER      shift and go to state 12
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 10
 
     expression                     shift and go to state 18
 
 state 10
-
-    (11) expression -> IDENTIFIER .
-
-    ADD_OP          reduce using rule 11 (expression -> IDENTIFIER .)
-    MUL_OP          reduce using rule 11 (expression -> IDENTIFIER .)
-    ;               reduce using rule 11 (expression -> IDENTIFIER .)
-    $end            reduce using rule 11 (expression -> IDENTIFIER .)
-    }               reduce using rule 11 (expression -> IDENTIFIER .)
-    {               reduce using rule 11 (expression -> IDENTIFIER .)
-    )               reduce using rule 11 (expression -> IDENTIFIER .)
-    ,               reduce using rule 11 (expression -> IDENTIFIER .)
-
-
-state 11
-
-    (5) statement -> PRINT expression .
-    (8) expression -> expression . ADD_OP expression
-    (9) expression -> expression . MUL_OP expression
-
-    ;               reduce using rule 5 (statement -> PRINT expression .)
-    $end            reduce using rule 5 (statement -> PRINT expression .)
-    }               reduce using rule 5 (statement -> PRINT expression .)
-    ADD_OP          shift and go to state 19
-    MUL_OP          shift and go to state 20
-
-
-state 12
 
     (13) expression -> ADD_OP . expression
     (8) expression -> . expression ADD_OP expression
@@ -204,14 +177,14 @@ state 12
     (12) expression -> . ( expression )
     (13) expression -> . ADD_OP expression
 
-    NUMBER          shift and go to state 13
-    IDENTIFIER      shift and go to state 10
-    (               shift and go to state 9
-    ADD_OP          shift and go to state 12
+    NUMBER          shift and go to state 11
+    IDENTIFIER      shift and go to state 12
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 10
 
-    expression                     shift and go to state 21
+    expression                     shift and go to state 19
 
-state 13
+state 11
 
     (10) expression -> NUMBER .
 
@@ -220,32 +193,54 @@ state 13
     ;               reduce using rule 10 (expression -> NUMBER .)
     $end            reduce using rule 10 (expression -> NUMBER .)
     }               reduce using rule 10 (expression -> NUMBER .)
-    {               reduce using rule 10 (expression -> NUMBER .)
-    )               reduce using rule 10 (expression -> NUMBER .)
     ,               reduce using rule 10 (expression -> NUMBER .)
+    )               reduce using rule 10 (expression -> NUMBER .)
+    {               reduce using rule 10 (expression -> NUMBER .)
 
+
+state 12
+
+    (11) expression -> IDENTIFIER .
+
+    ADD_OP          reduce using rule 11 (expression -> IDENTIFIER .)
+    MUL_OP          reduce using rule 11 (expression -> IDENTIFIER .)
+    ;               reduce using rule 11 (expression -> IDENTIFIER .)
+    $end            reduce using rule 11 (expression -> IDENTIFIER .)
+    }               reduce using rule 11 (expression -> IDENTIFIER .)
+    ,               reduce using rule 11 (expression -> IDENTIFIER .)
+    )               reduce using rule 11 (expression -> IDENTIFIER .)
+    {               reduce using rule 11 (expression -> IDENTIFIER .)
+
+
+state 13
+
+    (12) expression -> ( . expression )
+    (8) expression -> . expression ADD_OP expression
+    (9) expression -> . expression MUL_OP expression
+    (10) expression -> . NUMBER
+    (11) expression -> . IDENTIFIER
+    (12) expression -> . ( expression )
+    (13) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 11
+    IDENTIFIER      shift and go to state 12
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 10
+
+    expression                     shift and go to state 20
 
 state 14
 
-    (2) programme -> statement ; . programme
-    (1) programme -> . statement
-    (2) programme -> . statement ; programme
-    (3) statement -> . assignation
-    (4) statement -> . structure
-    (5) statement -> . PRINT expression
-    (7) statement -> . PRINTPIXEL ( expression , expression , expression , expression , expression )
-    (14) assignation -> . IDENTIFIER = expression
-    (6) structure -> . WHILE expression { programme }
+    (5) statement -> PRINT expression .
+    (8) expression -> expression . ADD_OP expression
+    (9) expression -> expression . MUL_OP expression
 
-    PRINT           shift and go to state 1
-    PRINTPIXEL      shift and go to state 8
-    IDENTIFIER      shift and go to state 5
-    WHILE           shift and go to state 7
+    ;               reduce using rule 5 (statement -> PRINT expression .)
+    $end            reduce using rule 5 (statement -> PRINT expression .)
+    }               reduce using rule 5 (statement -> PRINT expression .)
+    ADD_OP          shift and go to state 21
+    MUL_OP          shift and go to state 22
 
-    assignation                    shift and go to state 6
-    statement                      shift and go to state 3
-    structure                      shift and go to state 2
-    programme                      shift and go to state 22
 
 state 15
 
@@ -257,10 +252,10 @@ state 15
     (12) expression -> . ( expression )
     (13) expression -> . ADD_OP expression
 
-    NUMBER          shift and go to state 13
-    IDENTIFIER      shift and go to state 10
-    (               shift and go to state 9
-    ADD_OP          shift and go to state 12
+    NUMBER          shift and go to state 11
+    IDENTIFIER      shift and go to state 12
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 10
 
     expression                     shift and go to state 23
 
@@ -271,73 +266,44 @@ state 16
     (9) expression -> expression . MUL_OP expression
 
     {               shift and go to state 24
-    ADD_OP          shift and go to state 19
-    MUL_OP          shift and go to state 20
+    ADD_OP          shift and go to state 21
+    MUL_OP          shift and go to state 22
 
 
 state 17
 
-    (7) statement -> PRINTPIXEL ( . expression , expression , expression , expression , expression )
-    (8) expression -> . expression ADD_OP expression
-    (9) expression -> . expression MUL_OP expression
-    (10) expression -> . NUMBER
-    (11) expression -> . IDENTIFIER
-    (12) expression -> . ( expression )
-    (13) expression -> . ADD_OP expression
+    (2) programme -> statement ; . programme
+    (1) programme -> . statement
+    (2) programme -> . statement ; programme
+    (3) statement -> . assignation
+    (4) statement -> . structure
+    (5) statement -> . PRINT expression
+    (7) statement -> . PRINTPIXEL ( expression , expression , expression , expression , expression )
+    (14) assignation -> . IDENTIFIER = expression
+    (6) structure -> . WHILE expression { programme }
 
-    NUMBER          shift and go to state 13
-    IDENTIFIER      shift and go to state 10
-    (               shift and go to state 9
-    ADD_OP          shift and go to state 12
+    PRINT           shift and go to state 2
+    PRINTPIXEL      shift and go to state 1
+    IDENTIFIER      shift and go to state 4
+    WHILE           shift and go to state 6
 
-    expression                     shift and go to state 25
+    programme                      shift and go to state 25
+    structure                      shift and go to state 7
+    assignation                    shift and go to state 3
+    statement                      shift and go to state 8
 
 state 18
 
-    (12) expression -> ( expression . )
+    (7) statement -> PRINTPIXEL ( expression . , expression , expression , expression , expression )
     (8) expression -> expression . ADD_OP expression
     (9) expression -> expression . MUL_OP expression
 
-    )               shift and go to state 26
-    ADD_OP          shift and go to state 19
-    MUL_OP          shift and go to state 20
+    ,               shift and go to state 26
+    ADD_OP          shift and go to state 21
+    MUL_OP          shift and go to state 22
 
 
 state 19
-
-    (8) expression -> expression ADD_OP . expression
-    (8) expression -> . expression ADD_OP expression
-    (9) expression -> . expression MUL_OP expression
-    (10) expression -> . NUMBER
-    (11) expression -> . IDENTIFIER
-    (12) expression -> . ( expression )
-    (13) expression -> . ADD_OP expression
-
-    NUMBER          shift and go to state 13
-    IDENTIFIER      shift and go to state 10
-    (               shift and go to state 9
-    ADD_OP          shift and go to state 12
-
-    expression                     shift and go to state 27
-
-state 20
-
-    (9) expression -> expression MUL_OP . expression
-    (8) expression -> . expression ADD_OP expression
-    (9) expression -> . expression MUL_OP expression
-    (10) expression -> . NUMBER
-    (11) expression -> . IDENTIFIER
-    (12) expression -> . ( expression )
-    (13) expression -> . ADD_OP expression
-
-    NUMBER          shift and go to state 13
-    IDENTIFIER      shift and go to state 10
-    (               shift and go to state 9
-    ADD_OP          shift and go to state 12
-
-    expression                     shift and go to state 28
-
-state 21
 
     (13) expression -> ADD_OP expression .
     (8) expression -> expression . ADD_OP expression
@@ -348,21 +314,58 @@ state 21
     ;               reduce using rule 13 (expression -> ADD_OP expression .)
     $end            reduce using rule 13 (expression -> ADD_OP expression .)
     }               reduce using rule 13 (expression -> ADD_OP expression .)
-    {               reduce using rule 13 (expression -> ADD_OP expression .)
-    )               reduce using rule 13 (expression -> ADD_OP expression .)
     ,               reduce using rule 13 (expression -> ADD_OP expression .)
+    )               reduce using rule 13 (expression -> ADD_OP expression .)
+    {               reduce using rule 13 (expression -> ADD_OP expression .)
 
-  ! ADD_OP          [ shift and go to state 19 ]
-  ! MUL_OP          [ shift and go to state 20 ]
+  ! ADD_OP          [ shift and go to state 21 ]
+  ! MUL_OP          [ shift and go to state 22 ]
 
+
+state 20
+
+    (12) expression -> ( expression . )
+    (8) expression -> expression . ADD_OP expression
+    (9) expression -> expression . MUL_OP expression
+
+    )               shift and go to state 27
+    ADD_OP          shift and go to state 21
+    MUL_OP          shift and go to state 22
+
+
+state 21
+
+    (8) expression -> expression ADD_OP . expression
+    (8) expression -> . expression ADD_OP expression
+    (9) expression -> . expression MUL_OP expression
+    (10) expression -> . NUMBER
+    (11) expression -> . IDENTIFIER
+    (12) expression -> . ( expression )
+    (13) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 11
+    IDENTIFIER      shift and go to state 12
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 10
+
+    expression                     shift and go to state 28
 
 state 22
 
-    (2) programme -> statement ; programme .
+    (9) expression -> expression MUL_OP . expression
+    (8) expression -> . expression ADD_OP expression
+    (9) expression -> . expression MUL_OP expression
+    (10) expression -> . NUMBER
+    (11) expression -> . IDENTIFIER
+    (12) expression -> . ( expression )
+    (13) expression -> . ADD_OP expression
 
-    $end            reduce using rule 2 (programme -> statement ; programme .)
-    }               reduce using rule 2 (programme -> statement ; programme .)
+    NUMBER          shift and go to state 11
+    IDENTIFIER      shift and go to state 12
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 10
 
+    expression                     shift and go to state 29
 
 state 23
 
@@ -371,10 +374,10 @@ state 23
     (9) expression -> expression . MUL_OP expression
 
     ;               reduce using rule 14 (assignation -> IDENTIFIER = expression .)
-    }               reduce using rule 14 (assignation -> IDENTIFIER = expression .)
     $end            reduce using rule 14 (assignation -> IDENTIFIER = expression .)
-    ADD_OP          shift and go to state 19
-    MUL_OP          shift and go to state 20
+    }               reduce using rule 14 (assignation -> IDENTIFIER = expression .)
+    ADD_OP          shift and go to state 21
+    MUL_OP          shift and go to state 22
 
 
 state 24
@@ -389,28 +392,42 @@ state 24
     (14) assignation -> . IDENTIFIER = expression
     (6) structure -> . WHILE expression { programme }
 
-    PRINT           shift and go to state 1
-    PRINTPIXEL      shift and go to state 8
-    IDENTIFIER      shift and go to state 5
-    WHILE           shift and go to state 7
+    PRINT           shift and go to state 2
+    PRINTPIXEL      shift and go to state 1
+    IDENTIFIER      shift and go to state 4
+    WHILE           shift and go to state 6
 
-    assignation                    shift and go to state 6
-    statement                      shift and go to state 3
-    structure                      shift and go to state 2
-    programme                      shift and go to state 29
+    programme                      shift and go to state 30
+    structure                      shift and go to state 7
+    assignation                    shift and go to state 3
+    statement                      shift and go to state 8
 
 state 25
 
-    (7) statement -> PRINTPIXEL ( expression . , expression , expression , expression , expression )
-    (8) expression -> expression . ADD_OP expression
-    (9) expression -> expression . MUL_OP expression
+    (2) programme -> statement ; programme .
 
-    ,               shift and go to state 30
-    ADD_OP          shift and go to state 19
-    MUL_OP          shift and go to state 20
+    }               reduce using rule 2 (programme -> statement ; programme .)
+    $end            reduce using rule 2 (programme -> statement ; programme .)
 
 
 state 26
+
+    (7) statement -> PRINTPIXEL ( expression , . expression , expression , expression , expression )
+    (8) expression -> . expression ADD_OP expression
+    (9) expression -> . expression MUL_OP expression
+    (10) expression -> . NUMBER
+    (11) expression -> . IDENTIFIER
+    (12) expression -> . ( expression )
+    (13) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 11
+    IDENTIFIER      shift and go to state 12
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 10
+
+    expression                     shift and go to state 31
+
+state 27
 
     (12) expression -> ( expression ) .
 
@@ -419,12 +436,12 @@ state 26
     ;               reduce using rule 12 (expression -> ( expression ) .)
     $end            reduce using rule 12 (expression -> ( expression ) .)
     }               reduce using rule 12 (expression -> ( expression ) .)
-    {               reduce using rule 12 (expression -> ( expression ) .)
-    )               reduce using rule 12 (expression -> ( expression ) .)
     ,               reduce using rule 12 (expression -> ( expression ) .)
+    )               reduce using rule 12 (expression -> ( expression ) .)
+    {               reduce using rule 12 (expression -> ( expression ) .)
 
 
-state 27
+state 28
 
     (8) expression -> expression ADD_OP expression .
     (8) expression -> expression . ADD_OP expression
@@ -434,16 +451,16 @@ state 27
     ;               reduce using rule 8 (expression -> expression ADD_OP expression .)
     $end            reduce using rule 8 (expression -> expression ADD_OP expression .)
     }               reduce using rule 8 (expression -> expression ADD_OP expression .)
-    {               reduce using rule 8 (expression -> expression ADD_OP expression .)
-    )               reduce using rule 8 (expression -> expression ADD_OP expression .)
     ,               reduce using rule 8 (expression -> expression ADD_OP expression .)
-    MUL_OP          shift and go to state 20
+    )               reduce using rule 8 (expression -> expression ADD_OP expression .)
+    {               reduce using rule 8 (expression -> expression ADD_OP expression .)
+    MUL_OP          shift and go to state 22
 
   ! MUL_OP          [ reduce using rule 8 (expression -> expression ADD_OP expression .) ]
-  ! ADD_OP          [ shift and go to state 19 ]
+  ! ADD_OP          [ shift and go to state 21 ]
 
 
-state 28
+state 29
 
     (9) expression -> expression MUL_OP expression .
     (8) expression -> expression . ADD_OP expression
@@ -454,56 +471,39 @@ state 28
     ;               reduce using rule 9 (expression -> expression MUL_OP expression .)
     $end            reduce using rule 9 (expression -> expression MUL_OP expression .)
     }               reduce using rule 9 (expression -> expression MUL_OP expression .)
-    {               reduce using rule 9 (expression -> expression MUL_OP expression .)
-    )               reduce using rule 9 (expression -> expression MUL_OP expression .)
     ,               reduce using rule 9 (expression -> expression MUL_OP expression .)
+    )               reduce using rule 9 (expression -> expression MUL_OP expression .)
+    {               reduce using rule 9 (expression -> expression MUL_OP expression .)
 
-  ! ADD_OP          [ shift and go to state 19 ]
-  ! MUL_OP          [ shift and go to state 20 ]
-
-
-state 29
-
-    (6) structure -> WHILE expression { programme . }
-
-    }               shift and go to state 31
+  ! ADD_OP          [ shift and go to state 21 ]
+  ! MUL_OP          [ shift and go to state 22 ]
 
 
 state 30
 
-    (7) statement -> PRINTPIXEL ( expression , . expression , expression , expression , expression )
-    (8) expression -> . expression ADD_OP expression
-    (9) expression -> . expression MUL_OP expression
-    (10) expression -> . NUMBER
-    (11) expression -> . IDENTIFIER
-    (12) expression -> . ( expression )
-    (13) expression -> . ADD_OP expression
+    (6) structure -> WHILE expression { programme . }
 
-    NUMBER          shift and go to state 13
-    IDENTIFIER      shift and go to state 10
-    (               shift and go to state 9
-    ADD_OP          shift and go to state 12
+    }               shift and go to state 32
 
-    expression                     shift and go to state 32
 
 state 31
-
-    (6) structure -> WHILE expression { programme } .
-
-    ;               reduce using rule 6 (structure -> WHILE expression { programme } .)
-    $end            reduce using rule 6 (structure -> WHILE expression { programme } .)
-    }               reduce using rule 6 (structure -> WHILE expression { programme } .)
-
-
-state 32
 
     (7) statement -> PRINTPIXEL ( expression , expression . , expression , expression , expression )
     (8) expression -> expression . ADD_OP expression
     (9) expression -> expression . MUL_OP expression
 
     ,               shift and go to state 33
-    ADD_OP          shift and go to state 19
-    MUL_OP          shift and go to state 20
+    ADD_OP          shift and go to state 21
+    MUL_OP          shift and go to state 22
+
+
+state 32
+
+    (6) structure -> WHILE expression { programme } .
+
+    ;               reduce using rule 6 (structure -> WHILE expression { programme } .)
+    $end            reduce using rule 6 (structure -> WHILE expression { programme } .)
+    }               reduce using rule 6 (structure -> WHILE expression { programme } .)
 
 
 state 33
@@ -516,10 +516,10 @@ state 33
     (12) expression -> . ( expression )
     (13) expression -> . ADD_OP expression
 
-    NUMBER          shift and go to state 13
-    IDENTIFIER      shift and go to state 10
-    (               shift and go to state 9
-    ADD_OP          shift and go to state 12
+    NUMBER          shift and go to state 11
+    IDENTIFIER      shift and go to state 12
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 10
 
     expression                     shift and go to state 34
 
@@ -530,8 +530,8 @@ state 34
     (9) expression -> expression . MUL_OP expression
 
     ,               shift and go to state 35
-    ADD_OP          shift and go to state 19
-    MUL_OP          shift and go to state 20
+    ADD_OP          shift and go to state 21
+    MUL_OP          shift and go to state 22
 
 
 state 35
@@ -544,10 +544,10 @@ state 35
     (12) expression -> . ( expression )
     (13) expression -> . ADD_OP expression
 
-    NUMBER          shift and go to state 13
-    IDENTIFIER      shift and go to state 10
-    (               shift and go to state 9
-    ADD_OP          shift and go to state 12
+    NUMBER          shift and go to state 11
+    IDENTIFIER      shift and go to state 12
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 10
 
     expression                     shift and go to state 36
 
@@ -558,8 +558,8 @@ state 36
     (9) expression -> expression . MUL_OP expression
 
     ,               shift and go to state 37
-    ADD_OP          shift and go to state 19
-    MUL_OP          shift and go to state 20
+    ADD_OP          shift and go to state 21
+    MUL_OP          shift and go to state 22
 
 
 state 37
@@ -572,10 +572,10 @@ state 37
     (12) expression -> . ( expression )
     (13) expression -> . ADD_OP expression
 
-    NUMBER          shift and go to state 13
-    IDENTIFIER      shift and go to state 10
-    (               shift and go to state 9
-    ADD_OP          shift and go to state 12
+    NUMBER          shift and go to state 11
+    IDENTIFIER      shift and go to state 12
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 10
 
     expression                     shift and go to state 38
 
@@ -586,8 +586,8 @@ state 38
     (9) expression -> expression . MUL_OP expression
 
     )               shift and go to state 39
-    ADD_OP          shift and go to state 19
-    MUL_OP          shift and go to state 20
+    ADD_OP          shift and go to state 21
+    MUL_OP          shift and go to state 22
 
 
 state 39
