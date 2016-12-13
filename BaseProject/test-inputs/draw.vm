@@ -1,6 +1,1 @@
-img[PUSHC 1.0
-,PUSHC 2.0
-]=[PUSHC 3.0
-,PUSHC 4.0
-,PUSHC 5.0
-]
+img[1.0,2.0]=[3.0,4.0,5.0]

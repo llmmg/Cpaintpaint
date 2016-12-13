@@ -45,9 +45,9 @@ def compile(self):
 def compile(self):
     bytecode = ""
     if isinstance(self.tok, str):
-        bytecode += "PUSHV %s\n" % self.tok
+        bytecode += "%s" % self.tok
     else:
-        bytecode += "PUSHC %s\n" % self.tok
+        bytecode += "%s" % self.tok
     return bytecode
 
 
@@ -98,13 +98,24 @@ def compile(self):
 def compile(self):
     counter = whilecounter()
     bytecode = ""
-    bytecode += "JMP cond%s\n" % counter
-    bytecode += "body%s: " % counter
+    # bytecode += "JMP cond%s\n" % counter
+    # bytecode += "body%s: " % counter
+    # bytecode += self.children[1].compile()
+    # bytecode += "cond%s: " % counter
+    # bytecode += self.children[0].compile()
+    # bytecode += "JINZ body%s\n" % counter
+
+    ##TEST
+    # body
+    bytecode += "---body---: \n"
     bytecode += self.children[1].compile()
-    bytecode += "cond%s: " % counter
+    bytecode += "\n ---while param--- \n"
+    # while param
     bytecode += self.children[0].compile()
-    bytecode += "JINZ body%s\n" % counter
+
+    bytecode+="\nEND\n"
     return bytecode
+
 
 @addToClass(AST.PrintPixelNode)
 def compile(self):
@@ -122,7 +133,6 @@ def compile(self):
     return bytecode
 
 
-
 if __name__ == "__main__":
     from parserPaint import parse
     import sys, os
@@ -131,14 +141,14 @@ if __name__ == "__main__":
     ast = parse(prog)
     print(ast)
     compiled = ast.compile()
-    name = os.path.splitext(sys.argv[1])[0]+'.vm'
+    name = os.path.splitext(sys.argv[1])[0] + '.vm'
     outfile = open(name, 'w')
     outfile.write(compiled)
     outfile.close()
 
     print("Wrote output to", name)
 
-    # graph = ast.makegraphicaltree()
-    # graph.write_pdf(name)
-    #
-    # print("Wrote pdf tree to", name)
+    graph = ast.makegraphicaltree()
+    graph.write_pdf(os.path.splitext(sys.argv[1])[0]+'.pdf')
+
+    print("Wrote pdf tree to", name)
