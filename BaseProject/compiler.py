@@ -47,10 +47,15 @@ def compile(self):
 def compile(self):
     bytecode = ""
     if isinstance(self.tok, str):
-        bytecode += "%s" % self.tok
-    else:
-        bytecode += "%s" % self.tok
-    return bytecode
+    #     bytecode += "%s" % self.tok
+    # else:
+    #     bytecode += "%s" % self.tok
+    # return bytecode
+        try:
+            return vars[self.tok]
+        except KeyError:
+            print("*** Error: variable %s undefined!" % self.tok)
+    return self.tok
 
 
 # noeud d'assignation de variable
@@ -100,11 +105,13 @@ def compile(self):
             stack.append(c.compile())
         # bytecode += operations[self.op] + "\n"
         if self.op == '-':
-            vars[stack[0]] = float(vars[stack[0]]) - float(stack[1])
+            # vars[stack[0]] = float(vars[stack[0]]) - float(stack[1])
+            vars[self.children[0].tok] = vars[self.children[0].tok] - stack[1]
         elif self.op == '+':
-            vars[stack[0]] = float(vars[stack[0]]) + float(stack[1])
+            # vars[stack[0]] = float(vars[stack[0]]) + float(stack[1])
+            vars[self.children[0].tok] = vars[self.children[0].tok] + stack[1]
 
-    return bytecode
+    return vars[self.children[0].tok]
 
 
 # noeud de boucle while
@@ -126,12 +133,14 @@ def compile(self):
     ##TEST
     # body
     # bytecode += "\n---body---: \n"
-    bytecode += self.children[1].compile()
+    while(self.children[0].compile()!=0):
+        bytecode += str(self.children[1].compile())
+        bytecode+="\n"
     # bytecode += "\n ---while param--- \n"
     # while param
-    bytecode += self.children[0].compile()
-    bytecode+="="
-    bytecode+= vars[self.children[0].compile()]
+    # bytecode += self.children[0].compile()
+    # bytecode+="="
+    # bytecode+= str(vars[self.children[0].compile()])
     # bytecode += "\nEND\n"
 
     return bytecode
@@ -140,15 +149,15 @@ def compile(self):
 @addToClass(AST.PrintPixelNode)
 def compile(self):
     bytecode = "img["
-    bytecode += self.children[0].compile()
+    bytecode += str(self.children[0].compile())
     bytecode += ","
-    bytecode += self.children[1].compile()
+    bytecode += str(self.children[1].compile())
     bytecode += "]=["
-    bytecode += self.children[2].compile()
+    bytecode += str(self.children[2].compile())
     bytecode += ","
-    bytecode += self.children[3].compile()
+    bytecode += str(self.children[3].compile())
     bytecode += ","
-    bytecode += self.children[4].compile()
+    bytecode += str(self.children[4].compile())
     bytecode += "]"
     return bytecode
 
