@@ -19,6 +19,8 @@ operations = {
     '/': 'DIV'
 }
 
+vars = {}
+
 
 def whilecounter():
     whilecounter.current += 1
@@ -57,8 +59,14 @@ def compile(self):
 @addToClass(AST.AssignNode)
 def compile(self):
     bytecode = ""
-    bytecode += self.children[1].compile()
-    bytecode += "SET %s\n" % self.children[0].tok
+    # bytecode += self.children[1].compile()
+    # bytecode += "SET %s\n" % self.children[0].tok
+    name = self.children[0].tok
+    val = self.children[1].compile()
+    vars[name] = val
+    # bytecode += name + "="
+    # bytecode += val
+
     return bytecode
 
 
@@ -68,8 +76,11 @@ def compile(self):
 @addToClass(AST.PrintNode)
 def compile(self):
     bytecode = ""
-    bytecode += self.children[0].compile()
-    bytecode += "PRINT\n"
+    # bytecode += self.children[0].compile()
+    # bytecode += "PRINT\n"
+    bytecode += "print("
+    bytecode += vars(self.children[0].compile())
+
     return bytecode
 
 
@@ -80,12 +91,19 @@ def compile(self):
 def compile(self):
     bytecode = ""
     if len(self.children) == 1:
-        bytecode += self.children[0].compile()
+        # bytecode += self.children[0].compile()
         bytecode += "USUB\n"
     else:
+        stack = []
         for c in self.children:
-            bytecode += c.compile()
-        bytecode += operations[self.op] + "\n"
+            # bytecode += c.compile()
+            stack.append(c.compile())
+        # bytecode += operations[self.op] + "\n"
+        if self.op == '-':
+            vars[stack[0]] = float(vars[stack[0]]) - float(stack[1])
+        elif self.op == '+':
+            vars[stack[0]] = float(vars[stack[0]]) + float(stack[1])
+
     return bytecode
 
 
@@ -96,7 +114,7 @@ def compile(self):
 # réalise un saut conditionnel sur le résultat de la condition (empilé)
 @addToClass(AST.WhileNode)
 def compile(self):
-    counter = whilecounter()
+    # counter = whilecounter()
     bytecode = ""
     # bytecode += "JMP cond%s\n" % counter
     # bytecode += "body%s: " % counter
@@ -107,13 +125,15 @@ def compile(self):
 
     ##TEST
     # body
-    bytecode += "---body---: \n"
+    # bytecode += "\n---body---: \n"
     bytecode += self.children[1].compile()
-    bytecode += "\n ---while param--- \n"
+    # bytecode += "\n ---while param--- \n"
     # while param
     bytecode += self.children[0].compile()
+    bytecode+="="
+    bytecode+= vars[self.children[0].compile()]
+    # bytecode += "\nEND\n"
 
-    bytecode+="\nEND\n"
     return bytecode
 
 
@@ -149,6 +169,6 @@ if __name__ == "__main__":
     print("Wrote output to", name)
 
     graph = ast.makegraphicaltree()
-    graph.write_pdf(os.path.splitext(sys.argv[1])[0]+'.pdf')
+    graph.write_pdf(os.path.splitext(sys.argv[1])[0] + '.pdf')
 
     print("Wrote pdf tree to", name)

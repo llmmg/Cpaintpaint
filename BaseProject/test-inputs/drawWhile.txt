@@ -1,5 +1,5 @@
-a=0;
-while (a-10){
-    a=(a+1);
-    printPixel(1,2,3,4,5)
+a=10;
+while (a){
+    printPixel(1,2,3,4,5);
+    a=(a-2)
 }
