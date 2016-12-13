@@ -109,22 +109,22 @@ def compile(self):
 @addToClass(AST.PrintPixelNode)
 def compile(self):
     bytecode = "img["
-    bytecode += self.children[0]
+    bytecode += self.children[0].compile()
     bytecode += ","
-    bytecode += self.children[1]
+    bytecode += self.children[1].compile()
     bytecode += "]=["
-    bytecode += self.children[2]
+    bytecode += self.children[2].compile()
     bytecode += ","
-    bytecode += self.children[3]
+    bytecode += self.children[3].compile()
     bytecode += ","
-    bytecode += self.children[4]
+    bytecode += self.children[4].compile()
     bytecode += "]"
     return bytecode
 
 
 
 if __name__ == "__main__":
-    from parser5 import parse
+    from parserPaint import parse
     import sys, os
 
     prog = open(sys.argv[1]).read()

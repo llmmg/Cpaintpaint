@@ -1,9 +1,6 @@
-PUSHC 10.0
-SET a
-JMP cond1
-body1: PUSHV a
-PRINT
-cond1: PUSHV a
-JINZ body1
-PUSHV a
-PRINT
+img[PUSHC 1.0
+,PUSHC 2.0
+]=[PUSHC 3.0
+,PUSHC 4.0
+,PUSHC 5.0
+]
