@@ -19,7 +19,9 @@ operations = {
     '/': 'DIV'
 }
 
-dict_var = {}
+
+vars = {}
+
 
 
 def whilecounter():
@@ -47,11 +49,9 @@ def compile(self):
 def compile(self):
     bytecode = ""
     if isinstance(self.tok, str):
-        bytecode += dict_var["%s" % self.tok]
-        print("Variable" + bytecode)
+        bytecode += vars["%s" % self.tok]
     else:
         bytecode += "%s" % self.tok
-        print("Value" + bytecode)
     return bytecode
 
 
@@ -61,11 +61,7 @@ def compile(self):
 @addToClass(AST.AssignNode)
 def compile(self):
     bytecode = ""
-    dict_var[self.children[0].tok] = self.children[1].compile()
-    print(dict_var)
-    #bytecode += self.children[0].tok
-    #bytecode += " = %s" % self.children[1].compile()
-    #bytecode += "\n"
+    vars[self.children[0].tok] = self.children[1].compile()
     return bytecode
 
 
@@ -75,8 +71,11 @@ def compile(self):
 @addToClass(AST.PrintNode)
 def compile(self):
     bytecode = ""
-    bytecode += self.children[0].compile()
-    bytecode += "PRINT\n"
+    # bytecode += self.children[0].compile()
+    # bytecode += "PRINT\n"
+    bytecode += "print("
+    bytecode += vars(self.children[0].compile())
+
     return bytecode
 
 
@@ -87,17 +86,20 @@ def compile(self):
 def compile(self):
     bytecode = ""
     if len(self.children) == 1:
-        bytecode += self.children[0].compile()
+        # bytecode += self.children[0].compile()
         bytecode += "USUB\n"
     else:
 
+        stack = []
         for c in self.children:
-            bytecode += c.compile()
-        dict_var[self.children[0]] = bytecode
+            # bytecode += c.compile()
+            stack.append(c.compile())
+        # bytecode += operations[self.op] + "\n"
+        #if self.op == '-':
+            #vars[stack[0]] = float(vars[stack[0]]) - float(stack[1])
+        #elif self.op == '+':
+            #vars[stack[0]] = float(vars[stack[0]]) + float(stack[1])
 
-    print("operation")
-    print(dict_var)
-        #bytecode += operations[self.op] + "\n"
     return bytecode
 
 
@@ -108,7 +110,7 @@ def compile(self):
 # réalise un saut conditionnel sur le résultat de la condition (empilé)
 @addToClass(AST.WhileNode)
 def compile(self):
-    counter = whilecounter()
+    # counter = whilecounter()
     bytecode = ""
     # bytecode += "JMP cond%s\n" % counter
     # bytecode += "body%s: " % counter
@@ -119,13 +121,16 @@ def compile(self):
 
     ##TEST
     # body
+
+    # bytecode += "\n---body---: \n"
     bytecode += self.children[1].compile()
-    bytecode += ")"
-    bytecode += "\t"
+    # bytecode += "\n ---while param--- \n"
     # while param
     bytecode += self.children[0].compile()
+    bytecode+="="
+    bytecode+= vars[self.children[0].compile()]
+    # bytecode += "\nEND\n"
 
-    bytecode+=""
     return bytecode
 
 
@@ -146,7 +151,6 @@ def compile(self):
 
 
 
-
 if __name__ == "__main__":
     from parserPaint import parse
     import sys, os
@@ -155,7 +159,9 @@ if __name__ == "__main__":
     ast = parse(prog)
     print(ast)
     compiled = ast.compile()
+
     name = os.path.splitext(sys.argv[1])[0]+'.py'
+
     outfile = open(name, 'w')
     outfile.write("import numpy as np\n")
     outfile.write("import cv2\n")
@@ -170,7 +176,7 @@ if __name__ == "__main__":
 
     print("Wrote output to", name)
 
-    # graph = ast.makegraphicaltree()
-    # graph.write_pdf(name)
-    #
-    # print("Wrote pdf tree to", name)
+    graph = ast.makegraphicaltree()
+    graph.write_pdf(os.path.splitext(sys.argv[1])[0] + '.pdf')
+
+    print("Wrote pdf tree to", name)

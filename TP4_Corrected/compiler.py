@@ -123,4 +123,4 @@ if __name__ == "__main__":
     print("Wrote output to", name)
 
     graph = ast.makegraphicaltree()
-    graph.write_pdf(name)
+    graph.write_pdf(os.path.splitext(sys.argv[1])[0]+'.pdf')
