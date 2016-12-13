@@ -19,6 +19,8 @@ operations = {
     '/': 'DIV'
 }
 
+dict_var = {}
+
 
 def whilecounter():
     whilecounter.current += 1
@@ -45,9 +47,11 @@ def compile(self):
 def compile(self):
     bytecode = ""
     if isinstance(self.tok, str):
-        bytecode += "PUSHV %s\n" % self.tok
+        bytecode += dict_var["%s" % self.tok]
+        print("Variable" + bytecode)
     else:
-        bytecode += "PUSHC %s\n" % self.tok
+        bytecode += "%s" % self.tok
+        print("Value" + bytecode)
     return bytecode
 
 
@@ -57,8 +61,11 @@ def compile(self):
 @addToClass(AST.AssignNode)
 def compile(self):
     bytecode = ""
-    bytecode += self.children[1].compile()
-    bytecode += "SET %s\n" % self.children[0].tok
+    dict_var[self.children[0].tok] = self.children[1].compile()
+    print(dict_var)
+    #bytecode += self.children[0].tok
+    #bytecode += " = %s" % self.children[1].compile()
+    #bytecode += "\n"
     return bytecode
 
 
@@ -83,9 +90,14 @@ def compile(self):
         bytecode += self.children[0].compile()
         bytecode += "USUB\n"
     else:
+
         for c in self.children:
             bytecode += c.compile()
-        bytecode += operations[self.op] + "\n"
+        dict_var[self.children[0]] = bytecode
+
+    print("operation")
+    print(dict_var)
+        #bytecode += operations[self.op] + "\n"
     return bytecode
 
 
@@ -98,13 +110,24 @@ def compile(self):
 def compile(self):
     counter = whilecounter()
     bytecode = ""
-    bytecode += "JMP cond%s\n" % counter
-    bytecode += "body%s: " % counter
+    # bytecode += "JMP cond%s\n" % counter
+    # bytecode += "body%s: " % counter
+    # bytecode += self.children[1].compile()
+    # bytecode += "cond%s: " % counter
+    # bytecode += self.children[0].compile()
+    # bytecode += "JINZ body%s\n" % counter
+
+    ##TEST
+    # body
     bytecode += self.children[1].compile()
-    bytecode += "cond%s: " % counter
+    bytecode += ")"
+    bytecode += "\t"
+    # while param
     bytecode += self.children[0].compile()
-    bytecode += "JINZ body%s\n" % counter
+
+    bytecode+=""
     return bytecode
+
 
 @addToClass(AST.PrintPixelNode)
 def compile(self):
@@ -123,6 +146,7 @@ def compile(self):
 
 
 
+
 if __name__ == "__main__":
     from parserPaint import parse
     import sys, os
@@ -131,9 +155,17 @@ if __name__ == "__main__":
     ast = parse(prog)
     print(ast)
     compiled = ast.compile()
-    name = os.path.splitext(sys.argv[1])[0]+'.vm'
+    name = os.path.splitext(sys.argv[1])[0]+'.py'
     outfile = open(name, 'w')
+    outfile.write("import numpy as np\n")
+    outfile.write("import cv2\n")
+    outfile.write("img = np.zeros((400,300,3), np.uint8)\n")
+
     outfile.write(compiled)
+
+    outfile.write("\n\ncv2.imshow('image',img)\n")
+    outfile.write("cv2.waitKey(0)\n")
+    outfile.write("cv2.destroyAllWindows()\n")
     outfile.close()
 
     print("Wrote output to", name)

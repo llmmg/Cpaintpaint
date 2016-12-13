@@ -1,1 +1,1 @@
-printPixel(1,2,3,4,5)
+printPixel(20,20,255,255,60)
