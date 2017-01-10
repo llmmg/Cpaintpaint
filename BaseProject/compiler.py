@@ -132,7 +132,7 @@ def compile(self):
     # bytecode += "\n---body---: \n"
     while (self.children[0].compile() != 0):
         bytecode += str(self.children[1].compile())
-        bytecode += "\n"
+        # bytecode += "\n"
     # bytecode += "\n ---while param--- \n"
     # while param
     # bytecode += self.children[0].compile()
@@ -167,7 +167,16 @@ def compile(self):
     bytecode += ","
     bytecode += str(self.children[4].compile())
     bytecode += "]"
+    bytecode += "\n"
     return bytecode
+
+
+@addToClass(AST.EqualNode)
+def compile(self):
+    if (self.children[0].compile() == self.children[1].compile()):
+        return 1
+    else:
+        return 0
 
 
 if __name__ == "__main__":

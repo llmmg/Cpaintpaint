@@ -1,4 +1,8 @@
-a=1;
-if (a){
-    printPixel(100,100,a,4,100)
+a=100;
+if (a==100){
+    printPixel(101,100,a,4,100);
+    printPixel(102,100,a,4,200);
+    printPixel(110,100,a,4,250);
+    printPixel(120,100,a,4,250);
+    printPixel(130,100,a,4,250)
 }

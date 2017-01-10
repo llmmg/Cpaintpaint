@@ -142,6 +142,10 @@ class IfNode(Node):
     type = 'if'
 
 
+class EqualNode(Node):
+    type = '=='
+
+
 class PrintPixelNode(Node):
     type = 'printPixel'
 
