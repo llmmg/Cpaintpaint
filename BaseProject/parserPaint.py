@@ -31,6 +31,12 @@ def p_structure(p):
     p[0] = AST.WhileNode([p[2], p[4]])
 
 
+# TODO: END THIS
+def p_structure_for(p):
+    ''' structure : FOR '(' expression ';' expression ';' expression ')' '''
+    p[0] = AST.ForNode([p[3], p[5], p[7]])
+
+
 def p_structure_if(p):
     ''' structure : IF expression '{' programme '}' '''
     p[0] = AST.IfNode([p[2], p[4]])
@@ -56,13 +62,16 @@ def p_expression_notequal(p):
     ''' expression : expression NOTEQUAL expression '''
     p[0] = AST.NotEqualNode([p[1], p[3]])
 
+
 def p_expression_less(p):
     ''' expression : expression '<' expression '''
-    p[0] = AST.LessNode([p[1],p[3]])
+    p[0] = AST.LessNode([p[1], p[3]])
+
 
 def p_expression_more(p):
     ''' expression : expression '>' expression '''
     p[0] = AST.MoreNode([p[1], p[3]])
+
 
 def p_expression_num_or_var(p):
     '''expression : NUMBER
