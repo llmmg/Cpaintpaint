@@ -146,6 +146,10 @@ class EqualNode(Node):
     type = '=='
 
 
+class NotEqualNode(Node):
+    type = '!='
+
+
 class PrintPixelNode(Node):
     type = 'printPixel'
 

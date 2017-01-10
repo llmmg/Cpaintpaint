@@ -52,6 +52,11 @@ def p_expression_equal(p):
     p[0] = AST.EqualNode([p[1], p[3]])
 
 
+def p_expression_notequal(p):
+    ''' expression : expression NOTEQUAL expression '''
+    p[0] = AST.NotEqualNode([p[1], p[3]])
+
+
 def p_expression_num_or_var(p):
     '''expression : NUMBER
         | IDENTIFIER '''

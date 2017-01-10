@@ -13,6 +13,7 @@ tokens = (
              'MUL_OP',
              'IDENTIFIER',
              'EQUAL',
+             'NOTEQUAL',
          ) + tuple(map(lambda s: s.upper(), reserved_words))
 
 literals = '();={},'
@@ -46,7 +47,12 @@ def t_IDENTIFIER(t):
 
 
 def t_EQUAL(t):
-    '=='
+    r'=='
+    return t
+
+
+def t_NOTEQUAL(t):
+    r'!='
     return t
 
 

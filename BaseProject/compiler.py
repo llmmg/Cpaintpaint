@@ -178,6 +178,12 @@ def compile(self):
     else:
         return 0
 
+@addToClass(AST.NotEqualNode)
+def compile(self):
+    if (self.children[0].compile() == self.children[1].compile()):
+        return 0
+    else:
+        return 1
 
 if __name__ == "__main__":
     from parserPaint import parse
