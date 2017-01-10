@@ -30,6 +30,9 @@ def p_structure(p):
     ''' structure : WHILE expression '{' programme '}' '''
     p[0] = AST.WhileNode([p[2], p[4]])
 
+def p_structure_if(p):
+    ''' structure : IF expression '{' programme '}' '''
+    p[0] = AST.IfNode([p[2], p[4]])
 
 def p_printPixel(p):
     ''' statement : PRINTPIXEL '(' expression ',' expression ',' expression ',' expression ',' expression ')' '''
@@ -40,6 +43,7 @@ def p_expression_op(p):
     '''expression : expression ADD_OP expression
             | expression MUL_OP expression'''
     p[0] = AST.OpNode(p[2], [p[1], p[3]])
+
 
 
 def p_expression_num_or_var(p):

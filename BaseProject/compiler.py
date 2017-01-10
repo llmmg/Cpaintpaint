@@ -12,12 +12,13 @@ from AST import addToClass
 #    JIZ,JINZ <tag>  pops a value from the top of stack and jump to :<tag> if (not) zero
 
 # chaque opération correspond à son instruction d'exécution de la machine SVM
-operations = {
-    '+': 'ADD',
-    '-': 'SUB',
-    '*': 'MUL',
-    '/': 'DIV'
-}
+
+# operations = {
+#     '+': 'ADD',
+#     '-': 'SUB',
+#     '*': 'MUL',
+#     '/': 'DIV'
+# }
 
 vars = {}
 
@@ -146,9 +147,11 @@ def compile(self):
 def compile(self):
     bytecode = "\n"
     # if true
-    if (self.children[0].compile()):
+    if (self.children[0].compile() != 0):
         bytecode += str(self.children[1].compile())
         bytecode += "\n"
+
+    return bytecode
 
 
 @addToClass(AST.PrintPixelNode)

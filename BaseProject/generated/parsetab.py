@@ -5,9 +5,9 @@ _tabversion = '3.8'
 
 _lr_method = 'LALR'
 
-_lr_signature = '89A4617805BF0E3F19A022C1C4BA29CB'
+_lr_signature = '0552DAE6A064366C08404E06E41D0041'
     
-_lr_action_items = {',':([11,14,19,24,26,27,28,32,34,36,],[-11,-10,-13,30,-12,-8,-9,33,35,37,]),'MUL_OP':([11,13,14,15,19,20,24,25,26,27,28,32,34,36,38,],[-11,22,-10,22,-13,22,22,22,-12,22,-9,22,22,22,22,]),')':([11,14,19,20,26,27,28,38,],[-11,-10,-13,26,-12,-8,-9,39,]),'PRINT':([0,9,23,],[2,2,2,]),'ADD_OP':([2,5,10,11,12,13,14,15,16,17,19,20,21,22,24,25,26,27,28,30,32,33,34,35,36,37,38,],[10,10,10,-11,10,21,-10,21,10,10,-13,21,10,10,21,21,-12,-8,-9,10,21,10,21,10,21,10,21,]),'}':([1,3,4,11,13,14,18,19,25,26,27,28,29,31,39,],[-1,-4,-3,-11,-5,-10,-2,-13,-14,-12,-8,-9,31,-6,-7,]),'$end':([1,3,4,7,11,13,14,18,19,25,26,27,28,31,39,],[-1,-4,-3,0,-11,-5,-10,-2,-13,-14,-12,-8,-9,-6,-7,]),'{':([11,14,15,19,26,27,28,],[-11,-10,23,-13,-12,-8,-9,]),'=':([8,],[17,]),'WHILE':([0,9,23,],[5,5,5,]),'(':([2,5,6,10,12,16,17,21,22,30,33,35,37,],[12,12,16,12,12,12,12,12,12,12,12,12,12,]),'PRINTPIXEL':([0,9,23,],[6,6,6,]),';':([1,3,4,11,13,14,19,25,26,27,28,31,39,],[9,-4,-3,-11,-5,-10,-13,-14,-12,-8,-9,-6,-7,]),'NUMBER':([2,5,10,12,16,17,21,22,30,33,35,37,],[14,14,14,14,14,14,14,14,14,14,14,14,]),'IDENTIFIER':([0,2,5,9,10,12,16,17,21,22,23,30,33,35,37,],[8,11,11,8,11,11,11,11,11,11,8,11,11,11,11,]),}
+_lr_action_items = {';':([3,4,7,10,12,15,24,27,30,31,32,35,36,44,],[16,-4,-3,-12,-11,-5,-14,-15,-10,-9,-13,-6,-7,-8,]),'}':([3,4,7,10,12,15,24,25,27,29,30,31,32,33,35,36,44,],[-1,-4,-3,-12,-11,-5,-14,-2,-15,35,-10,-9,-13,36,-6,-7,-8,]),'PRINT':([0,16,20,26,],[2,2,2,2,]),'NUMBER':([1,2,5,13,14,18,19,21,22,34,38,40,42,],[12,12,12,12,12,12,12,12,12,12,12,12,12,]),'PRINTPIXEL':([0,16,20,26,],[8,8,8,8,]),'=':([6,],[18,]),'MUL_OP':([10,11,12,15,17,23,24,27,28,30,31,32,37,39,41,43,],[-12,21,-11,21,21,21,-14,21,21,-10,21,-13,21,21,21,21,]),'(':([1,2,5,8,13,14,18,19,21,22,34,38,40,42,],[13,13,13,19,13,13,13,13,13,13,13,13,13,13,]),',':([10,12,24,28,30,31,32,37,39,41,],[-12,-11,-14,34,-10,-9,-13,38,40,42,]),'IDENTIFIER':([0,1,2,5,13,14,16,18,19,20,21,22,26,34,38,40,42,],[6,10,10,10,10,10,6,10,10,6,10,10,6,10,10,10,10,]),'ADD_OP':([1,2,5,10,11,12,13,14,15,17,18,19,21,22,23,24,27,28,30,31,32,34,37,38,39,40,41,42,43,],[14,14,14,-12,22,-11,14,14,22,22,14,14,14,14,22,-14,22,22,-10,-9,-13,14,22,14,22,14,22,14,22,]),'WHILE':([0,16,20,26,],[1,1,1,1,]),'$end':([3,4,7,9,10,12,15,24,25,27,30,31,32,35,36,44,],[-1,-4,-3,0,-12,-11,-5,-14,-2,-15,-10,-9,-13,-6,-7,-8,]),')':([10,12,23,24,30,31,32,43,],[-12,-11,32,-14,-10,-9,-13,44,]),'IF':([0,16,20,26,],[5,5,5,5,]),'{':([10,11,12,17,24,30,31,32,],[-12,20,-11,26,-14,-10,-9,-13,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'structure':([0,9,23,],[3,3,3,]),'statement':([0,9,23,],[1,1,1,]),'assignation':([0,9,23,],[4,4,4,]),'programme':([0,9,23,],[7,18,29,]),'expression':([2,5,10,12,16,17,21,22,30,33,35,37,],[13,15,19,20,24,25,27,28,32,34,36,38,]),}
+_lr_goto_items = {'statement':([0,16,20,26,],[3,3,3,3,]),'expression':([1,2,5,13,14,18,19,21,22,34,38,40,42,],[11,15,17,23,24,27,28,30,31,37,39,41,43,]),'assignation':([0,16,20,26,],[7,7,7,7,]),'programme':([0,16,20,26,],[9,25,29,33,]),'structure':([0,16,20,26,],[4,4,4,4,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -32,12 +32,13 @@ _lr_productions = [
   ('statement -> structure','statement',1,'p_statement','parserPaint.py',20),
   ('statement -> PRINT expression','statement',2,'p_statement_print','parserPaint.py',25),
   ('structure -> WHILE expression { programme }','structure',5,'p_structure','parserPaint.py',30),
-  ('statement -> PRINTPIXEL ( expression , expression , expression , expression , expression )','statement',12,'p_printPixel','parserPaint.py',35),
-  ('expression -> expression ADD_OP expression','expression',3,'p_expression_op','parserPaint.py',40),
-  ('expression -> expression MUL_OP expression','expression',3,'p_expression_op','parserPaint.py',41),
-  ('expression -> NUMBER','expression',1,'p_expression_num_or_var','parserPaint.py',46),
-  ('expression -> IDENTIFIER','expression',1,'p_expression_num_or_var','parserPaint.py',47),
-  ('expression -> ( expression )','expression',3,'p_expression_paren','parserPaint.py',52),
-  ('expression -> ADD_OP expression','expression',2,'p_minus','parserPaint.py',57),
-  ('assignation -> IDENTIFIER = expression','assignation',3,'p_assign','parserPaint.py',62),
+  ('structure -> IF expression { programme }','structure',5,'p_structure_if','parserPaint.py',34),
+  ('statement -> PRINTPIXEL ( expression , expression , expression , expression , expression )','statement',12,'p_printPixel','parserPaint.py',38),
+  ('expression -> expression ADD_OP expression','expression',3,'p_expression_op','parserPaint.py',43),
+  ('expression -> expression MUL_OP expression','expression',3,'p_expression_op','parserPaint.py',44),
+  ('expression -> NUMBER','expression',1,'p_expression_num_or_var','parserPaint.py',50),
+  ('expression -> IDENTIFIER','expression',1,'p_expression_num_or_var','parserPaint.py',51),
+  ('expression -> ( expression )','expression',3,'p_expression_paren','parserPaint.py',56),
+  ('expression -> ADD_OP expression','expression',2,'p_minus','parserPaint.py',61),
+  ('assignation -> IDENTIFIER = expression','assignation',3,'p_assign','parserPaint.py',66),
 ]
