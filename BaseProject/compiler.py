@@ -19,9 +19,7 @@ operations = {
     '/': 'DIV'
 }
 
-
 vars = {}
-
 
 
 def whilecounter():
@@ -49,10 +47,10 @@ def compile(self):
 def compile(self):
     bytecode = ""
     if isinstance(self.tok, str):
-    #     bytecode += "%s" % self.tok
-    # else:
-    #     bytecode += "%s" % self.tok
-    # return bytecode
+        #     bytecode += "%s" % self.tok
+        # else:
+        #     bytecode += "%s" % self.tok
+        # return bytecode
         try:
             return vars[self.tok]
         except KeyError:
@@ -119,7 +117,7 @@ def compile(self):
 @addToClass(AST.WhileNode)
 def compile(self):
     # counter = whilecounter()
-    bytecode = ""
+    bytecode = "\n"
     # bytecode += "JMP cond%s\n" % counter
     # bytecode += "body%s: " % counter
     # bytecode += self.children[1].compile()
@@ -131,9 +129,9 @@ def compile(self):
     # body
 
     # bytecode += "\n---body---: \n"
-    while(self.children[0].compile()!=0):
+    while (self.children[0].compile() != 0):
         bytecode += str(self.children[1].compile())
-        bytecode+="\n"
+        bytecode += "\n"
     # bytecode += "\n ---while param--- \n"
     # while param
     # bytecode += self.children[0].compile()
@@ -142,6 +140,15 @@ def compile(self):
     # bytecode += "\nEND\n"
 
     return bytecode
+
+
+@addToClass(AST.IfNode)
+def compile(self):
+    bytecode = "\n"
+    # if true
+    if (self.children[0].compile()):
+        bytecode += str(self.children[1].compile())
+        bytecode += "\n"
 
 
 @addToClass(AST.PrintPixelNode)
@@ -160,7 +167,6 @@ def compile(self):
     return bytecode
 
 
-
 if __name__ == "__main__":
     from parserPaint import parse
     import sys, os
@@ -170,7 +176,7 @@ if __name__ == "__main__":
     print(ast)
     compiled = ast.compile()
 
-    name = os.path.splitext(sys.argv[1])[0]+'.py'
+    name = os.path.splitext(sys.argv[1])[0] + '.py'
 
     outfile = open(name, 'w')
     outfile.write("import numpy as np\n")

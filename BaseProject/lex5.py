@@ -1,6 +1,7 @@
 import ply.lex as lex
 
 reserved_words = (
+	'if',
 	'while',
 	'print',
 	'printPixel'
