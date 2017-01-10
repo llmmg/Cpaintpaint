@@ -150,6 +150,14 @@ class NotEqualNode(Node):
     type = '!='
 
 
+class LessNode(Node):
+    type = '<'
+
+
+class MoreNode(Node):
+    type = '>'
+
+
 class PrintPixelNode(Node):
     type = 'printPixel'
 

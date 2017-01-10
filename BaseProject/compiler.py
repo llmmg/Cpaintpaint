@@ -185,6 +185,20 @@ def compile(self):
     else:
         return 1
 
+@addToClass(AST.LessNode)
+def compile(self):
+    if(self.children[0].compile() < self.children[1].compile()):
+        return 1
+    else:
+        return 0
+
+@addToClass(AST.MoreNode)
+def compile(self):
+    if(self.children[0].compile() > self.children[1].compile()):
+        return 1
+    else:
+        return 0
+
 if __name__ == "__main__":
     from parserPaint import parse
     import sys, os
