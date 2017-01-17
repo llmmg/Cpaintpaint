@@ -143,6 +143,19 @@ def compile(self):
     return bytecode
 
 
+@addToClass(AST.ForNode)
+def compile(self):
+    bytecode = "\n"
+    while (self.children[1].compile()):
+        bytecode += str(self.children[3].compile())
+        self.children[0].compile()
+        self.children[2].compile()
+        # self.children[0] += self.children[2].compile()
+
+
+    return bytecode
+
+
 @addToClass(AST.IfNode)
 def compile(self):
     bytecode = "\n"
@@ -178,6 +191,7 @@ def compile(self):
     else:
         return 0
 
+
 @addToClass(AST.NotEqualNode)
 def compile(self):
     if (self.children[0].compile() == self.children[1].compile()):
@@ -185,19 +199,22 @@ def compile(self):
     else:
         return 1
 
+
 @addToClass(AST.LessNode)
 def compile(self):
-    if(self.children[0].compile() < self.children[1].compile()):
+    if (self.children[0].compile() < self.children[1].compile()):
         return 1
     else:
         return 0
 
+
 @addToClass(AST.MoreNode)
 def compile(self):
-    if(self.children[0].compile() > self.children[1].compile()):
+    if (self.children[0].compile() > self.children[1].compile()):
         return 1
     else:
         return 0
+
 
 if __name__ == "__main__":
     from parserPaint import parse

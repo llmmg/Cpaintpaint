@@ -157,6 +157,8 @@ class LessNode(Node):
 class MoreNode(Node):
     type = '>'
 
+class ForNode(Node):
+    type= 'for'
 
 class PrintPixelNode(Node):
     type = 'printPixel'

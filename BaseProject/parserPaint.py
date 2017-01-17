@@ -33,8 +33,8 @@ def p_structure(p):
 
 # TODO: END THIS
 def p_structure_for(p):
-    ''' structure : FOR '(' expression ';' expression ';' expression ')' '''
-    p[0] = AST.ForNode([p[3], p[5], p[7]])
+    ''' structure : FOR '(' expression ';' expression ';' expression ')' '{' programme '}' '''
+    p[0] = AST.ForNode([p[3], p[5], p[7], p[10]])
 
 
 def p_structure_if(p):

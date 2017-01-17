@@ -4,7 +4,8 @@ reserved_words = (
     'if',
     'while',
     'print',
-    'printPixel'
+    'printPixel',
+    'for'
 )
 
 tokens = (
@@ -14,6 +15,7 @@ tokens = (
              'IDENTIFIER',
              'EQUAL',
              'NOTEQUAL',
+
          ) + tuple(map(lambda s: s.upper(), reserved_words))
 
 literals = '();={},<>'
