@@ -26,15 +26,14 @@ def p_statement_print(p):
     p[0] = AST.PrintNode(p[2])
 
 
+def p_structure_for(p):
+    ''' structure : FOR expression ',' expression ',' expression '{' programme '}' '''
+    p[0] = AST.ForNode([p[2], p[4], p[6], p[8]])
+
+
 def p_structure(p):
     ''' structure : WHILE expression '{' programme '}' '''
     p[0] = AST.WhileNode([p[2], p[4]])
-
-
-# TODO: END THIS
-def p_structure_for(p):
-    ''' structure : FOR '(' expression ';' expression ';' expression ')' '{' programme '}' '''
-    p[0] = AST.ForNode([p[3], p[5], p[7], p[10]])
 
 
 def p_structure_if(p):
