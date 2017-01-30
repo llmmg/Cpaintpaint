@@ -100,14 +100,19 @@ def compile(self):
             stack.append(c.compile())
         # bytecode += operations[self.op] + "\n"
 
+        temp = 0
+
         if self.op == '-':
             # vars[stack[0]] = float(vars[stack[0]]) - float(stack[1])
-            vars[self.children[0].tok] = vars[self.children[0].tok] - stack[1]
+            # vars[self.children[0].tok] = vars[self.children[0].tok] - stack[1]
+            temp = self.children[0].compile() - self.children[1].compile()
         elif self.op == '+':
             # vars[stack[0]] = float(vars[stack[0]]) + float(stack[1])
-            vars[self.children[0].tok] = vars[self.children[0].tok] + stack[1]
+            # vars[self.children[0].tok] = vars[self.children[0].tok] + stack[1]
+            temp = self.children[0].compile() + self.children[1].compile()
 
-    return vars[self.children[0].tok]
+    # return vars[self.children[0].tok]
+    return temp
 
 
 # noeud de boucle while
@@ -147,7 +152,7 @@ def compile(self):
 def compile(self):
     bytecode = "\n"
 
-    while (self.children[0].compile()):
+    while(self.children[0].compile()):
         self.children[1].compile()
         bytecode += str(self.children[2].compile())
         # self.children[0] += self.children[2].compile()

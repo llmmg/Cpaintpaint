@@ -1,12 +1,13 @@
 a=255;
 c=299;
 while (a){
-    printPixel(a,c,30,4,a);
+    x=30;
+    printPixel(a,c,x+a,4,a);
     a=(a-1);
     c=(c-2);
     b=255;
-    while(b){
+    while(b>50){
         printPixel(c,b,100,b,c);
-        b=(b-5)
+        b=(b-1)
     }
 }
