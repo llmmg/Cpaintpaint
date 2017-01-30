@@ -1,5 +1,12 @@
 import AST
 from AST import addToClass
+from functools import reduce
+operations = {
+    '+' : lambda x,y: x+y,
+    '-' : lambda x,y: x-y,
+    '*' : lambda x,y: x*y,
+    '/' : lambda x,y: x/y,
+}
 
 # opcodes de la SVM
 #    PUSHC <val>     pushes the constant <val> on the stack
@@ -46,12 +53,8 @@ def compile(self):
 # si c'est une constante : empile la constante
 @addToClass(AST.TokenNode)
 def compile(self):
-    bytecode = ""
+
     if isinstance(self.tok, str):
-        #     bytecode += "%s" % self.tok
-        # else:
-        #     bytecode += "%s" % self.tok
-        # return bytecode
         try:
             return vars[self.tok]
         except KeyError:
@@ -64,9 +67,8 @@ def compile(self):
 # dépile un élément et le met dans ID
 @addToClass(AST.AssignNode)
 def compile(self):
-    bytecode = ""
     vars[self.children[0].tok] = self.children[1].compile()
-    return bytecode
+    return ""
 
 
 # noeud d'affichage
@@ -89,31 +91,10 @@ def compile(self):
 @addToClass(AST.OpNode)
 def compile(self):
     bytecode = ""
-    if len(self.children) == 1:
-        # bytecode += self.children[0].compile()
-        bytecode += "USUB\n"
-    else:
-
-        stack = []
-        for c in self.children:
-            # bytecode += c.compile()
-            stack.append(c.compile())
-        # bytecode += operations[self.op] + "\n"
-
-        temp = 0
-
-        if self.op == '-':
-            # vars[stack[0]] = float(vars[stack[0]]) - float(stack[1])
-            # vars[self.children[0].tok] = vars[self.children[0].tok] - stack[1]
-            temp = self.children[0].compile() - self.children[1].compile()
-        elif self.op == '+':
-            # vars[stack[0]] = float(vars[stack[0]]) + float(stack[1])
-            # vars[self.children[0].tok] = vars[self.children[0].tok] + stack[1]
-            temp = self.children[0].compile() + self.children[1].compile()
-
-    # return vars[self.children[0].tok]
-    return temp
-
+    args = [c.compile() for c in self.children]
+    if len(args) == 1:
+        args.insert(0,0)
+    return reduce(operations[self.op], args)
 
 # noeud de boucle while
 # saute au label de la condition défini plus bas
@@ -122,28 +103,12 @@ def compile(self):
 # réalise un saut conditionnel sur le résultat de la condition (empilé)
 @addToClass(AST.WhileNode)
 def compile(self):
-    # counter = whilecounter()
+
     bytecode = "\n"
-    # bytecode += "JMP cond%s\n" % counter
-    # bytecode += "body%s: " % counter
-    # bytecode += self.children[1].compile()
-    # bytecode += "cond%s: " % counter
-    # bytecode += self.children[0].compile()
-    # bytecode += "JINZ body%s\n" % counter
 
-    ##TEST
-    # body
-
-    # bytecode += "\n---body---: \n"
     while (self.children[0].compile() != 0):
         bytecode += str(self.children[1].compile())
-        # bytecode += "\n"
-    # bytecode += "\n ---while param--- \n"
-    # while param
-    # bytecode += self.children[0].compile()
-    # bytecode+="="
-    # bytecode+= str(vars[self.children[0].compile()])
-    # bytecode += "\nEND\n"
+
 
     return bytecode
 
@@ -235,6 +200,7 @@ if __name__ == "__main__":
     outfile.write("import numpy as np\n")
     outfile.write("import cv2\n")
     outfile.write("img = np.zeros((400,300,3), np.uint8)\n")
+
 
     outfile.write(compiled)
 
