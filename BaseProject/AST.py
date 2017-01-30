@@ -138,6 +138,10 @@ class WhileNode(Node):
     type = 'while'
 
 
+class ForNode(Node):
+    type = 'for'
+
+
 class IfNode(Node):
     type = 'if'
 
@@ -156,10 +160,6 @@ class LessNode(Node):
 
 class MoreNode(Node):
     type = '>'
-
-
-class ForNode(Node):
-    type = 'for'
 
 
 class PrintPixelNode(Node):

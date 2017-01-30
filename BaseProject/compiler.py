@@ -147,11 +147,9 @@ def compile(self):
 def compile(self):
     bytecode = "\n"
 
-    # self.children[0].compile()
-
     while (self.children[0].compile()):
-        bytecode += str(self.children[2].compile())
         self.children[1].compile()
+        bytecode += str(self.children[2].compile())
         # self.children[0] += self.children[2].compile()
 
     return bytecode

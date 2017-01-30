@@ -29,8 +29,8 @@ def p_statement_print(p):
 def p_structure_for(p):
     # ''' structure : FOR expression ',' expression ',' expression '{' programme '}' '''
     # p[0] = AST.ForNode([p[2], p[4], p[6], p[8]])
-    ''' structure : FOR expression ',' expression '{' programme '}' '''
-    p[0] = AST.ForNode([p[2], p[4], p[6]])
+    ''' structure : FOR '(' expression ',' expression ')' '{' programme '}' '''
+    p[0] = AST.ForNode([p[3], p[5], p[8]])
 
 
 def p_structure(p):
@@ -107,6 +107,10 @@ precedence = (
     ('left', 'ADD_OP'),
     ('left', 'MUL_OP'),
     ('right', 'UMINUS'),
+    ('right', 'EQUAL'),
+    ('right', 'NOTEQUAL'),
+    ('right', '<'),
+    ('right', '>'),
 )
 
 
