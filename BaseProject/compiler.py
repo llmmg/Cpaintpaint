@@ -170,15 +170,15 @@ def compile(self):
 @addToClass(AST.PrintPixelNode)
 def compile(self):
     bytecode = "img["
-    bytecode += str(self.children[0].compile())
+    bytecode += str(int(self.children[0].compile()))
     bytecode += ","
-    bytecode += str(self.children[1].compile())
+    bytecode += str(int(self.children[1].compile()))
     bytecode += "]=["
-    bytecode += str(self.children[2].compile())
+    bytecode += str(int(self.children[2].compile()))
     bytecode += ","
-    bytecode += str(self.children[3].compile())
+    bytecode += str(int(self.children[3].compile()))
     bytecode += ","
-    bytecode += str(self.children[4].compile())
+    bytecode += str(int(self.children[4].compile()))
     bytecode += "]"
     bytecode += "\n"
     return bytecode
