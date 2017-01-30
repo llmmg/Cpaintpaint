@@ -1,5 +1,12 @@
 import AST
 from AST import addToClass
+from functools import reduce
+operations = {
+    '+' : lambda x,y: x+y,
+    '-' : lambda x,y: x-y,
+    '*' : lambda x,y: x*y,
+    '/' : lambda x,y: x/y,
+}
 
 # opcodes de la SVM
 #    PUSHC <val>     pushes the constant <val> on the stack
@@ -35,10 +42,8 @@ whilecounter.current = 0
 # retourne la suite d'opcodes de tous les enfants
 @addToClass(AST.ProgramNode)
 def compile(self):
-    bytecode = ""
     for c in self.children:
-        bytecode += c.compile()
-    return bytecode
+        c.compile()
 
 
 # noeud terminal
@@ -46,12 +51,8 @@ def compile(self):
 # si c'est une constante : empile la constante
 @addToClass(AST.TokenNode)
 def compile(self):
-    bytecode = ""
+
     if isinstance(self.tok, str):
-        #     bytecode += "%s" % self.tok
-        # else:
-        #     bytecode += "%s" % self.tok
-        # return bytecode
         try:
             return vars[self.tok]
         except KeyError:
@@ -64,9 +65,7 @@ def compile(self):
 # dépile un élément et le met dans ID
 @addToClass(AST.AssignNode)
 def compile(self):
-    bytecode = ""
     vars[self.children[0].tok] = self.children[1].compile()
-    return bytecode
 
 
 # noeud d'affichage
@@ -88,27 +87,10 @@ def compile(self):
 # si c'est une opération binaire, empile les enfants puis l'opération
 @addToClass(AST.OpNode)
 def compile(self):
-    bytecode = ""
-    if len(self.children) == 1:
-        # bytecode += self.children[0].compile()
-        bytecode += "USUB\n"
-    else:
-
-        stack = []
-        for c in self.children:
-            # bytecode += c.compile()
-            stack.append(c.compile())
-        # bytecode += operations[self.op] + "\n"
-
-        if self.op == '-':
-            # vars[stack[0]] = float(vars[stack[0]]) - float(stack[1])
-            vars[self.children[0].tok] = vars[self.children[0].tok] - stack[1]
-        elif self.op == '+':
-            # vars[stack[0]] = float(vars[stack[0]]) + float(stack[1])
-            vars[self.children[0].tok] = vars[self.children[0].tok] + stack[1]
-
-    return vars[self.children[0].tok]
-
+    args = [c.compile() for c in self.children]
+    if len(args) == 1:
+        args.insert(0,0)
+    return reduce(operations[self.op], args)
 
 # noeud de boucle while
 # saute au label de la condition défini plus bas
@@ -117,28 +99,12 @@ def compile(self):
 # réalise un saut conditionnel sur le résultat de la condition (empilé)
 @addToClass(AST.WhileNode)
 def compile(self):
-    # counter = whilecounter()
+
     bytecode = "\n"
-    # bytecode += "JMP cond%s\n" % counter
-    # bytecode += "body%s: " % counter
-    # bytecode += self.children[1].compile()
-    # bytecode += "cond%s: " % counter
-    # bytecode += self.children[0].compile()
-    # bytecode += "JINZ body%s\n" % counter
 
-    ##TEST
-    # body
-
-    # bytecode += "\n---body---: \n"
     while (self.children[0].compile() != 0):
         bytecode += str(self.children[1].compile())
-        # bytecode += "\n"
-    # bytecode += "\n ---while param--- \n"
-    # while param
-    # bytecode += self.children[0].compile()
-    # bytecode+="="
-    # bytecode+= str(vars[self.children[0].compile()])
-    # bytecode += "\nEND\n"
+
 
     return bytecode
 
@@ -147,7 +113,7 @@ def compile(self):
 def compile(self):
     bytecode = "\n"
 
-    while (self.children[0].compile()):
+    while (self.children[0].compile() != 0):
         self.children[1].compile()
         bytecode += str(self.children[2].compile())
         # self.children[0] += self.children[2].compile()
@@ -222,7 +188,9 @@ if __name__ == "__main__":
     prog = open(sys.argv[1]).read()
     ast = parse(prog)
     print(ast)
-    compiled = ast.compile()
+    compiled = ""
+    if(ast):
+        compiled = ast.compile()
 
     name = os.path.splitext(sys.argv[1])[0] + '.py'
 
@@ -230,6 +198,7 @@ if __name__ == "__main__":
     outfile.write("import numpy as np\n")
     outfile.write("import cv2\n")
     outfile.write("img = np.zeros((400,300,3), np.uint8)\n")
+
 
     outfile.write(compiled)
 
@@ -240,7 +209,8 @@ if __name__ == "__main__":
 
     print("Wrote output to", name)
 
-    graph = ast.makegraphicaltree()
-    graph.write_pdf(os.path.splitext(sys.argv[1])[0] + '.pdf')
+    if(ast):
+        graph = ast.makegraphicaltree()
+        graph.write_pdf(os.path.splitext(sys.argv[1])[0] + '.pdf')
 
-    print("Wrote pdf tree to", name)
+        print("Wrote pdf tree to", name)
