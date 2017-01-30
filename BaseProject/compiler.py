@@ -1,11 +1,12 @@
 import AST
 from AST import addToClass
 from functools import reduce
+
 operations = {
-    '+' : lambda x,y: x+y,
-    '-' : lambda x,y: x-y,
-    '*' : lambda x,y: x*y,
-    '/' : lambda x,y: x/y,
+    '+': lambda x, y: x + y,
+    '-': lambda x, y: x - y,
+    '*': lambda x, y: x * y,
+    '/': lambda x, y: x / y,
 }
 
 # opcodes de la SVM
@@ -53,7 +54,6 @@ def compile(self):
 # si c'est une constante : empile la constante
 @addToClass(AST.TokenNode)
 def compile(self):
-
     if isinstance(self.tok, str):
         try:
             return vars[self.tok]
@@ -93,8 +93,9 @@ def compile(self):
     bytecode = ""
     args = [c.compile() for c in self.children]
     if len(args) == 1:
-        args.insert(0,0)
+        args.insert(0, 0)
     return reduce(operations[self.op], args)
+
 
 # noeud de boucle while
 # saute au label de la condition défini plus bas
@@ -103,13 +104,10 @@ def compile(self):
 # réalise un saut conditionnel sur le résultat de la condition (empilé)
 @addToClass(AST.WhileNode)
 def compile(self):
-
     bytecode = "\n"
 
     while (self.children[0].compile() != 0):
         bytecode += str(self.children[1].compile())
-
-
     return bytecode
 
 
@@ -117,11 +115,10 @@ def compile(self):
 def compile(self):
     bytecode = "\n"
 
-    while(self.children[0].compile()):
+    while (self.children[0].compile()):
         self.children[1].compile()
         bytecode += str(self.children[2].compile())
         # self.children[0] += self.children[2].compile()
-
     return bytecode
 
 
@@ -200,7 +197,6 @@ if __name__ == "__main__":
     outfile.write("import numpy as np\n")
     outfile.write("import cv2\n")
     outfile.write("img = np.zeros((400,300,3), np.uint8)\n")
-
 
     outfile.write(compiled)
 
