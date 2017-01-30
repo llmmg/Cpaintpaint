@@ -42,8 +42,10 @@ whilecounter.current = 0
 # retourne la suite d'opcodes de tous les enfants
 @addToClass(AST.ProgramNode)
 def compile(self):
+    bytecode = ""
     for c in self.children:
-        c.compile()
+        bytecode += c.compile()
+    return bytecode
 
 
 # noeud terminal
@@ -66,6 +68,7 @@ def compile(self):
 @addToClass(AST.AssignNode)
 def compile(self):
     vars[self.children[0].tok] = self.children[1].compile()
+    return ""
 
 
 # noeud d'affichage
@@ -87,6 +90,7 @@ def compile(self):
 # si c'est une opération binaire, empile les enfants puis l'opération
 @addToClass(AST.OpNode)
 def compile(self):
+    bytecode = ""
     args = [c.compile() for c in self.children]
     if len(args) == 1:
         args.insert(0,0)
@@ -188,9 +192,7 @@ if __name__ == "__main__":
     prog = open(sys.argv[1]).read()
     ast = parse(prog)
     print(ast)
-    compiled = ""
-    if(ast):
-        compiled = ast.compile()
+    compiled = ast.compile()
 
     name = os.path.splitext(sys.argv[1])[0] + '.py'
 
@@ -209,8 +211,7 @@ if __name__ == "__main__":
 
     print("Wrote output to", name)
 
-    if(ast):
-        graph = ast.makegraphicaltree()
-        graph.write_pdf(os.path.splitext(sys.argv[1])[0] + '.pdf')
+    graph = ast.makegraphicaltree()
+    graph.write_pdf(os.path.splitext(sys.argv[1])[0] + '.pdf')
 
-        print("Wrote pdf tree to", name)
+    print("Wrote pdf tree to", name)
