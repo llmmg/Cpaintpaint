@@ -30,7 +30,7 @@ def t_ADD_OP(t):
 
 
 def t_MUL_OP(t):
-    r'[*/]'
+    r'[*/%]'
     return t
 
 

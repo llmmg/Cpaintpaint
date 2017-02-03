@@ -7,6 +7,7 @@ operations = {
     '-': lambda x, y: x - y,
     '*': lambda x, y: x * y,
     '/': lambda x, y: x / y,
+    '%': lambda x, y: x % y,
 }
 
 # opcodes de la SVM
