@@ -157,11 +157,13 @@ def compile(self):
     rc = str(int(self.children[4].compile()))
     gc = str(int(self.children[5].compile()))
     bc = str(int(self.children[6].compile()))
+    t = int(self.children[6].compile())
     a = (yf-yi)/(xf-xi)
     b  = yi - a * xi
-    for x in range(xi, xf):
-        y = int((a * x + b))
-        bytecode += "img["+str(x)+","+str(y)+"]=["+rc+","+gc+","+bc+"]\n"
+    for i in range(-t/2, t/2):
+        for x in range(xi, xf):
+            y = int((a * x + b))
+            bytecode += "img["+str(x)+","+str(y+i)+"]=["+rc+","+gc+","+bc+"]\n"
 
     print(bytecode)
     return bytecode
