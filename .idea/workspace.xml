@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63be372b-db6f-4b0d-a5ac-ff4177c73358" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BaseProject/test-inputs/drawLine.pdf" afterPath="$PROJECT_DIR$/BaseProject/test-inputs/drawLine.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BaseProject/compiler.py" afterPath="$PROJECT_DIR$/BaseProject/compiler.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BaseProject/test-inputs/drawIf.py" afterPath="$PROJECT_DIR$/BaseProject/test-inputs/drawIf.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BaseProject/test-inputs/drawLine.ptpt" afterPath="$PROJECT_DIR$/BaseProject/test-inputs/drawLine.ptpt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BaseProject/test-inputs/drawLine.py" afterPath="$PROJECT_DIR$/BaseProject/test-inputs/drawLine.py" />
     </list>
@@ -38,11 +35,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="compiler.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="compiler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BaseProject/compiler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="164" column="12" lean-forward="false" selection-start-line="164" selection-start-column="12" selection-end-line="164" selection-end-column="12" />
+            <state relative-caret-position="1863">
+              <caret line="163" column="12" lean-forward="false" selection-start-line="163" selection-start-column="12" selection-end-line="163" selection-end-column="12" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -50,7 +47,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AST.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AST.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BaseProject/AST.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1006">
@@ -96,7 +93,7 @@
         <entry file="file://$PROJECT_DIR$/BaseProject/test-inputs/drawLine.ptpt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -174,8 +171,8 @@
         <option value="$PROJECT_DIR$/BaseProject/AST.py" />
         <option value="$PROJECT_DIR$/BaseProject/lex5.py" />
         <option value="$PROJECT_DIR$/BaseProject/test-inputs/drawIf.txt" />
-        <option value="$PROJECT_DIR$/BaseProject/test-inputs/drawLine.ptpt" />
         <option value="$PROJECT_DIR$/BaseProject/compiler.py" />
+        <option value="$PROJECT_DIR$/BaseProject/test-inputs/drawLine.ptpt" />
       </list>
     </option>
   </component>
@@ -995,14 +992,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BaseProject/AST.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1006">
-          <caret line="59" column="44" lean-forward="true" selection-start-line="59" selection-start-column="44" selection-end-line="59" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BaseProject/parserPaint.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1535">
@@ -1016,18 +1005,26 @@
     <entry file="file://$PROJECT_DIR$/BaseProject/test-inputs/drawLine.ptpt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BaseProject/compiler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="164" column="12" lean-forward="false" selection-start-line="164" selection-start-column="12" selection-end-line="164" selection-end-column="12" />
+        <state relative-caret-position="1863">
+          <caret line="163" column="12" lean-forward="false" selection-start-line="163" selection-start-column="12" selection-end-line="163" selection-end-column="12" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BaseProject/AST.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1006">
+          <caret line="59" column="44" lean-forward="true" selection-start-line="59" selection-start-column="44" selection-end-line="59" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>
