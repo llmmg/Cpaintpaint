@@ -133,10 +133,11 @@ def compile(self):
 
 @addToClass(AST.PrintPixelNode)
 def compile(self):
+    # In opencv x and y are inversed ??
     bytecode = "img["
-    bytecode += str(int(self.children[0].compile()))
-    bytecode += ","
     bytecode += str(int(self.children[1].compile()))
+    bytecode += ","
+    bytecode += str(int(self.children[0].compile()))
     bytecode += "]=["
     bytecode += str(int(self.children[2].compile()))
     bytecode += ","
@@ -150,10 +151,10 @@ def compile(self):
 @addToClass(AST.DrawLineNode)
 def compile(self):
     bytecode = ""
-    xi = int(self.children[0].compile())
-    yi = int(self.children[1].compile())
-    xf = int(self.children[2].compile())
-    yf = int(self.children[3].compile())
+    xi = int(self.children[1].compile())
+    yi = int(self.children[0].compile())
+    xf = int(self.children[3].compile())
+    yf = int(self.children[2].compile())
     rc = str(int(self.children[4].compile()))
     gc = str(int(self.children[5].compile()))
     bc = str(int(self.children[6].compile()))
@@ -225,7 +226,7 @@ if __name__ == "__main__":
     outfile = open(name, 'w')
     outfile.write("import numpy as np\n")
     outfile.write("import cv2\n")
-    outfile.write("img = np.zeros((400,300,3), np.uint8)\n")
+    outfile.write("img = np.zeros((500,500,3), np.uint8)\n")
 
     outfile.write(compiled)
 
