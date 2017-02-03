@@ -176,13 +176,30 @@ def compile(self):
                 x = int((a * y + b))
                 bytecode += "img[" + str(x + i) + "," + str(y) + "]=[" + rc + "," + gc + "," + bc + "]\n"
 
-    print(bytecode)
+    return bytecode
+
+
+@addToClass(AST.DrawRectangleNode)
+def compile(self):
+    bytecode = ""
+    xi = int(self.children[1].compile())
+    yi = int(self.children[0].compile())
+    xf = int(self.children[3].compile())
+    yf = int(self.children[2].compile())
+    rc = str(int(self.children[4].compile()))
+    gc = str(int(self.children[5].compile()))
+    bc = str(int(self.children[6].compile()))
+
+    for i in range(xi, xf, 1 if ((xf - xi) > 1) else -1):
+        for j in range(yi, yf, 1 if ((yf - yi) > 1) else -1):
+            bytecode += "img[" + str(i) + "," + str(j) + "]=[" + rc + "," + gc + "," + bc + "]\n"
+
     return bytecode
 
 
 @addToClass(AST.DrawCircleNode)
 def compile(self):
-    bytecode=""
+    bytecode = ""
     x = int(self.children[1].compile())
     y = int(self.children[0].compile())
     r = int(self.children[2].compile())
@@ -191,12 +208,13 @@ def compile(self):
     gc = str(int(self.children[4].compile()))
     bc = str(int(self.children[5].compile()))
 
-    for i in range(x-r, x+r):
-        for j in range(y-r,y+r):
-            if ((i-x)**2 + (j-y)**2) <= r:
+    for i in range(x - r, x + r):
+        for j in range(y - r, y + r):
+            if ((i - x) ** 2 + (j - y) ** 2) <= r:
                 bytecode += "img[" + str(i) + "," + str(j) + "]=[" + rc + "," + gc + "," + bc + "]\n"
 
     return bytecode
+
 
 @addToClass(AST.EqualNode)
 def compile(self):

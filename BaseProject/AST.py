@@ -161,14 +161,22 @@ class LessNode(Node):
 class MoreNode(Node):
     type = '>'
 
+
 class PrintPixelNode(Node):
     type = 'printPixel'
+
 
 class DrawLineNode(Node):
     type = 'drawLine'
 
+
 class DrawCircleNode(Node):
     type = 'drawCircle'
+
+
+class DrawRectangleNode(Node):
+    type = 'drawRectangle'
+
 
 class EntryNode(Node):
     type = 'ENTRY'

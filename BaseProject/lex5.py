@@ -8,6 +8,7 @@ reserved_words = (
     'for',
     'drawLine',
     'drawCircle',
+    'drawRectangle'
 )
 
 tokens = (
