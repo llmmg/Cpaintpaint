@@ -6,7 +6,8 @@ reserved_words = (
     'print',
     'printPixel',
     'for',
-    'drawLine'
+    'drawLine',
+    'drawCircle',
 )
 
 tokens = (

@@ -148,6 +148,7 @@ def compile(self):
     bytecode += "\n"
     return bytecode
 
+
 @addToClass(AST.DrawLineNode)
 def compile(self):
     bytecode = ""
@@ -159,26 +160,43 @@ def compile(self):
     gc = str(int(self.children[5].compile()))
     bc = str(int(self.children[6].compile()))
     t = int(self.children[7].compile())
-    if((xf-xi) != 0):
-        a = (yf-yi)/(xf-xi)
-        b  = yi - a * xi
-        for i in range(int(-t/2), int(t/2)):
-            for x in range(xi, xf, 1 if ((xf-xi)>1) else -1):
+    if ((xf - xi) != 0):
+        a = (yf - yi) / (xf - xi)
+        b = yi - a * xi
+        for i in range(int(-t / 2), int(t / 2)):
+            for x in range(xi, xf, 1 if ((xf - xi) > 1) else -1):
                 y = int((a * x + b))
-                bytecode += "img["+str(x)+","+str(y+i)+"]=["+rc+","+gc+","+bc+"]\n"
+                bytecode += "img[" + str(x) + "," + str(y + i) + "]=[" + rc + "," + gc + "," + bc + "]\n"
 
-    if((yf-yi) != 0):
-        a = (xf-xi)/(yf-yi)
-        b  = xi - a * yi
-        for i in range(int(-t/2), int(t/2)):
-            for y in range(yi, yf, 1 if ((yf-yi)>1) else -1):
+    if ((yf - yi) != 0):
+        a = (xf - xi) / (yf - yi)
+        b = xi - a * yi
+        for i in range(int(-t / 2), int(t / 2)):
+            for y in range(yi, yf, 1 if ((yf - yi) > 1) else -1):
                 x = int((a * y + b))
-                bytecode += "img["+str(x+i)+","+str(y)+"]=["+rc+","+gc+","+bc+"]\n"
-
+                bytecode += "img[" + str(x + i) + "," + str(y) + "]=[" + rc + "," + gc + "," + bc + "]\n"
 
     print(bytecode)
     return bytecode
 
+
+@addToClass(AST.DrawCircleNode)
+def compile(self):
+    bytecode=""
+    x = int(self.children[1].compile())
+    y = int(self.children[0].compile())
+    r = int(self.children[2].compile())
+
+    rc = str(int(self.children[3].compile()))
+    gc = str(int(self.children[4].compile()))
+    bc = str(int(self.children[5].compile()))
+
+    for i in range(x-r, x+r):
+        for j in range(y-r,y+r):
+            if ((i-x)**2 + (j-y)**2) <= r:
+                bytecode += "img[" + str(i) + "," + str(j) + "]=[" + rc + "," + gc + "," + bc + "]\n"
+
+    return bytecode
 
 @addToClass(AST.EqualNode)
 def compile(self):

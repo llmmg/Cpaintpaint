@@ -167,6 +167,9 @@ class PrintPixelNode(Node):
 class DrawLineNode(Node):
     type = 'drawLine'
 
+class DrawCircleNode(Node):
+    type = 'drawCircle'
+
 class EntryNode(Node):
     type = 'ENTRY'
 
