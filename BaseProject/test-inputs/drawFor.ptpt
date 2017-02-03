@@ -8,6 +8,12 @@ for(i<399,i=(i+1)){
     c=c+12;
     for(j<299,j=j+1){
         printPixel(i,j,b+c,b,c);
+        v=0;
+        while(v<5)
+        {
+            printPixel(j,v,b,b+c,v*3);
+            v=v+1
+        };
         b=b+20
     }
 }
