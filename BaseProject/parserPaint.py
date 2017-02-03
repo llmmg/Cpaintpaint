@@ -62,7 +62,7 @@ def p_drawCircle(p):
 
 # Rectangle : x1, y1, x2, y2, R, G, B
 def p_drawRectangle(p):
-    ''' statement : DRAWRECTANGLE '(' expression ',' expression ',' expression ',' expression ',' expression ',' expression ',' expression ',' expression ')' '''
+    ''' statement : DRAWRECTANGLE '(' expression ',' expression ',' expression ',' expression ',' expression ',' expression ',' expression ')' '''
     p[0] = AST.DrawRectangleNode([p[3], p[5], p[7], p[9], p[11], p[13], p[15]])
 
 
