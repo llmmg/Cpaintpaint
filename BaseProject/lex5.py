@@ -5,7 +5,8 @@ reserved_words = (
     'while',
     'print',
     'printPixel',
-    'for'
+    'for',
+    'drawLine'
 )
 
 tokens = (
