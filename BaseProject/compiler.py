@@ -150,19 +150,20 @@ def compile(self):
 @addToClass(AST.DrawLineNode)
 def compile(self):
     bytecode = ""
-    xi = self.children[0].compile()
-    yi = self.children[1].compile()
-    xf = self.children[2].compile()
-    yf = self.children[3].compile()
-    r = str(int(self.children[4].compile()))
-    g = str(int(self.children[5].compile()))
-    b = str(int(self.children[6].compile()))
+    xi = int(self.children[0].compile())
+    yi = int(self.children[1].compile())
+    xf = int(self.children[2].compile())
+    yf = int(self.children[3].compile())
+    rc = str(int(self.children[4].compile()))
+    gc = str(int(self.children[5].compile()))
+    bc = str(int(self.children[6].compile()))
     a = (yf-yi)/(xf-xi)
     b  = yi - a * xi
     for x in range(xi, xf):
         y = int((a * x + b))
-        bytecode += "img["+str(x)+","+str(y)+"]=["+r+","+g+","+b+"]\n"
+        bytecode += "img["+str(x)+","+str(y)+"]=["+rc+","+gc+","+bc+"]\n"
 
+    print(bytecode)
     return bytecode
 
 

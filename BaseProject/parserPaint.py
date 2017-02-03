@@ -49,7 +49,7 @@ def p_printPixel(p):
 
 def p_drawLine(p):
     ''' statement : DRAWLINE '(' expression ',' expression ',' expression ',' expression ',' expression ',' expression ',' expression ',' expression ')' '''
-    p[0] = AST.DrawLine([p[3], p[5], p[7], p[9], p[11], p[13], p[15]])
+    p[0] = AST.DrawLineNode([p[3], p[5], p[7], p[9], p[11], p[13], p[15]])
 
 def p_expression_op(p):
     '''expression : expression ADD_OP expression
@@ -103,7 +103,7 @@ def p_error(p):
         print("Syntax error in line %d" % p.lineno)
         yacc.errok()
     else:
-        print("Sytax error: unexpected end of file!")
+        print("Syntax error: unexpected end of file!")
 
 
 precedence = (
