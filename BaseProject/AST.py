@@ -167,6 +167,9 @@ class PrintPixelNode(Node):
 class DrawLineNode(Node):
     type = 'drawLine'
 
+class DrawRectangleNode(Node):
+    type = 'drawRectangle'
+
 class EntryNode(Node):
     type = 'ENTRY'
 

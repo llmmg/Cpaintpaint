@@ -175,8 +175,23 @@ def compile(self):
                 x = int((a * y + b))
                 bytecode += "img["+str(x+i)+","+str(y)+"]=["+rc+","+gc+","+bc+"]\n"
 
+    return bytecode
 
-    print(bytecode)
+@addToClass(AST.DrawRectangleNode)
+def compile(self):
+    bytecode = ""
+    xi = int(self.children[1].compile())
+    yi = int(self.children[0].compile())
+    xf = int(self.children[3].compile())
+    yf = int(self.children[2].compile())
+    rc = str(int(self.children[4].compile()))
+    gc = str(int(self.children[5].compile()))
+    bc = str(int(self.children[6].compile()))
+
+    for i in range(xi, xf, 1 if ((xf-xi)>1) else -1):
+        for j in range(yi, yf, 1 if ((yf-yi)>1) else -1):
+            bytecode += "img["+str(i)+","+str(j)+"]=["+rc+","+gc+","+bc+"]\n"
+
     return bytecode
 
 
