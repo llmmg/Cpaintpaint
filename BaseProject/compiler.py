@@ -113,10 +113,10 @@ def compile(self):
 @addToClass(AST.ForNode)
 def compile(self):
     bytecode = "\n"
-
-    while (self.children[0].compile()):
-        self.children[1].compile()
-        bytecode += str(self.children[2].compile())
+    self.children[0].compile()
+    while (self.children[1].compile()):
+        bytecode += str(self.children[3].compile())
+        self.children[2].compile()
         # self.children[0] += self.children[2].compile()
     return bytecode
 

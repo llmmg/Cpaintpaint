@@ -29,8 +29,8 @@ def p_statement_print(p):
 def p_structure_for(p):
     # ''' structure : FOR expression ',' expression ',' expression '{' programme '}' '''
     # p[0] = AST.ForNode([p[2], p[4], p[6], p[8]])
-    ''' structure : FOR '(' expression ',' assignation ')' '{' programme '}' '''
-    p[0] = AST.ForNode([p[3], p[5], p[8]])
+    ''' structure : FOR '(' assignation ',' expression ',' assignation ')' '{' programme '}' '''
+    p[0] = AST.ForNode([p[3], p[5], p[7],  p[10]])
 
 
 def p_structure(p):
@@ -62,7 +62,7 @@ def p_drawCircle(p):
 
 # Rectangle : x1, y1, x2, y2, R, G, B
 def p_drawRectangle(p):
-    ''' statement : DRAWRECTANGLE '(' expression ',' expression ',' expression ',' expression ',' expression ',' expression ',' expression ',' expression ')' '''
+    ''' statement : DRAWRECTANGLE '(' expression ',' expression ',' expression ',' expression ',' expression ',' expression ',' expression ')' '''
     p[0] = AST.DrawRectangleNode([p[3], p[5], p[7], p[9], p[11], p[13], p[15]])
 
 
