@@ -103,7 +103,7 @@ def compile(self):
 # réalise un saut conditionnel sur le résultat de la condition (empilé)
 @addToClass(AST.WhileNode)
 def compile(self):
-    bytecode = "\n"
+    bytecode = ""
 
     while (self.children[0].compile() != 0):
         bytecode += str(self.children[1].compile())
@@ -112,7 +112,7 @@ def compile(self):
 
 @addToClass(AST.ForNode)
 def compile(self):
-    bytecode = "\n"
+    bytecode = ""
 
     while (self.children[0].compile()):
         self.children[1].compile()
@@ -123,11 +123,11 @@ def compile(self):
 
 @addToClass(AST.IfNode)
 def compile(self):
-    bytecode = "\n"
+    bytecode = ""
     # if true
     if (self.children[0].compile() != 0):
         bytecode += str(self.children[1].compile())
-        bytecode += "\n"
+        # bytecode += "\n"
 
     return bytecode
 
@@ -211,7 +211,7 @@ def compile(self):
 
     for i in range(x - r, x + r):
         for j in range(y - r, y + r):
-            if ((i - x) ** 2 + (j - y) ** 2) <= r:
+            if ((i - x) ** 2 + (j - y) ** 2) <= r ** 2:
                 bytecode += "img[" + str(i) + "," + str(j) + "]=[" + rc + "," + gc + "," + bc + "]\n"
 
     return bytecode
