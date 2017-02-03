@@ -86,8 +86,6 @@ def compile(self):
 
 
 # noeud d'opération arithmétique
-# si c'est une opération unaire (nombre négatif), empile le nombre et l'inverse
-# si c'est une opération binaire, empile les enfants puis l'opération
 @addToClass(AST.OpNode)
 def compile(self):
     bytecode = ""
@@ -147,6 +145,24 @@ def compile(self):
     bytecode += str(int(self.children[4].compile()))
     bytecode += "]"
     bytecode += "\n"
+    return bytecode
+
+@addToClass(AST.DrawLineNode)
+def compile(self):
+    bytecode = ""
+    xi = self.children[0].compile()
+    yi = self.children[1].compile()
+    xf = self.children[2].compile()
+    yf = self.children[3].compile()
+    r = str(int(self.children[4].compile()))
+    g = str(int(self.children[5].compile()))
+    b = str(int(self.children[6].compile()))
+    a = (yf-yi)/(xf-xi)
+    b  = yi - a * xi
+    for x in range(xi, xf):
+        y = int((a * x + b))
+        bytecode += "img["+str(x)+","+str(y)+"]=["+r+","+g+","+b+"]\n"
+
     return bytecode
 
 
