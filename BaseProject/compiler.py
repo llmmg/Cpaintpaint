@@ -163,7 +163,7 @@ def compile(self):
         a = (yf-yi)/(xf-xi)
         b  = yi - a * xi
         for i in range(int(-t/2), int(t/2)):
-            for x in range(xi, xf):
+            for x in range(xi, xf, 1 if ((xf-xi)>1) else -1):
                 y = int((a * x + b))
                 bytecode += "img["+str(x)+","+str(y+i)+"]=["+rc+","+gc+","+bc+"]\n"
 
@@ -171,7 +171,7 @@ def compile(self):
         a = (xf-xi)/(yf-yi)
         b  = xi - a * yi
         for i in range(int(-t/2), int(t/2)):
-            for y in range(yi, yf):
+            for y in range(yi, yf, 1 if ((yf-yi)>1) else -1):
                 x = int((a * y + b))
                 bytecode += "img["+str(x+i)+","+str(y)+"]=["+rc+","+gc+","+bc+"]\n"
 
