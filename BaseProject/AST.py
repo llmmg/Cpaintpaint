@@ -129,11 +129,6 @@ class OpNode(Node):
 class AssignNode(Node):
     type = '='
 
-
-class PrintNode(Node):
-    type = 'print'
-
-
 class WhileNode(Node):
     type = 'while'
 
@@ -153,14 +148,17 @@ class EqualNode(Node):
 class NotEqualNode(Node):
     type = '!='
 
+class LessOrEqualNode(Node):
+    type = '<='
+
+class MoreOrEqualNode(Node):
+    type = '>='
 
 class LessNode(Node):
     type = '<'
 
-
 class MoreNode(Node):
     type = '>'
-
 
 class PrintPixelNode(Node):
     type = 'printPixel'

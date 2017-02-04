@@ -10,25 +10,6 @@ operations = {
     '%': lambda x, y: x % y,
 }
 
-# opcodes de la SVM
-#    PUSHC <val>     pushes the constant <val> on the stack
-#    PUSHV <id>      pushes the value of identifier <id> on the stack
-#    SET <id>        pops a value from the top of stack and sets <id>
-#    PRINT           pops a value from the top of stack and print it
-#    ADD,SUB,DIV,MUL pops 2 values from the top of stack and compute them
-#    USUB            changes the sign of the number on the top of stack
-#    JMP <tag>       jump to :<tag>
-#    JIZ,JINZ <tag>  pops a value from the top of stack and jump to :<tag> if (not) zero
-
-# chaque opération correspond à son instruction d'exécution de la machine SVM
-
-# operations = {
-#     '+': 'ADD',
-#     '-': 'SUB',
-#     '*': 'MUL',
-#     '/': 'DIV'
-# }
-
 vars = {}
 
 
@@ -244,6 +225,22 @@ def compile(self):
 @addToClass(AST.MoreNode)
 def compile(self):
     if (self.children[0].compile() > self.children[1].compile()):
+        return 1
+    else:
+        return 0
+
+@addToClass(AST.LessOrEqualNode)
+def compile(self):
+
+    if (self.children[0].compile() <= self.children[1].compile()):
+        return 1
+    else:
+        return 0
+
+
+@addToClass(AST.MoreOrEqualNode)
+def compile(self):
+    if (self.children[0].compile() >= self.children[1].compile()):
         return 1
     else:
         return 0

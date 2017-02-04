@@ -18,6 +18,8 @@ tokens = (
              'IDENTIFIER',
              'EQUAL',
              'NOTEQUAL',
+             'MOREOREQUAL',
+             'LESSOREQUAL'
 
          ) + tuple(map(lambda s: s.upper(), reserved_words))
 
@@ -58,6 +60,14 @@ def t_EQUAL(t):
 
 def t_NOTEQUAL(t):
     r'!='
+    return t
+
+def t_LESSOREQUAL(t):
+    r'<='
+    return t
+
+def t_MOREOREQUAL(t):
+    r'>='
     return t
 
 

@@ -91,6 +91,15 @@ def p_expression_more(p):
     ''' expression : expression '>' expression '''
     p[0] = AST.MoreNode([p[1], p[3]])
 
+def p_expression_lessorequal(p):
+    ''' expression : expression LESSOREQUAL expression '''
+    p[0] = AST.LessOrEqualNode([p[1], p[3]])
+
+
+def p_expression_moreorequal(p):
+    ''' expression : expression MOREOREQUAL expression '''
+    p[0] = AST.MoreOrEqualNode([p[1], p[3]])
+
 
 def p_expression_num_or_var(p):
     '''expression : NUMBER
@@ -127,6 +136,8 @@ precedence = (
     ('right', 'UMINUS'),
     ('right', 'EQUAL'),
     ('right', 'NOTEQUAL'),
+    ('right', 'LESSOREQUAL'),
+    ('right', 'MOREOREQUAL'),
     ('right', '<'),
     ('right', '>'),
 )
