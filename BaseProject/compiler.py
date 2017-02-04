@@ -253,6 +253,7 @@ if __name__ == "__main__":
     outfile.write("\n\ncv2.imshow('image',img)\n")
     outfile.write("cv2.waitKey(0)\n")
     outfile.write("cv2.destroyAllWindows()\n")
+    outfile.write("cv2.imwrite(__file__.split('.')[0]+'.png', img)")
     outfile.close()
 
     print("Wrote output to", name)
