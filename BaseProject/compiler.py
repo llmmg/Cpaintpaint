@@ -246,7 +246,7 @@ if __name__ == "__main__":
     outfile = open(name, 'w')
     outfile.write("import numpy as np\n")
     outfile.write("import cv2\n")
-    outfile.write("img = np.zeros((500,500,3), np.uint8)\n")
+    outfile.write("img = np.zeros((512,512,3), np.uint8)\n")
 
     outfile.write(compiled)
 

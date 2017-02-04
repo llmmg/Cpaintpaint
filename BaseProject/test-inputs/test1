@@ -3,12 +3,14 @@ for(i=0, i<400, i=(i+t)){
     for(j=0, j<400, j=(j+t)){
       if((i%(t*2))<t){
         if((j%(t*2))<t){
-          drawRectangle(i,j,i+t,j+t,255,255,255)
+          drawRectangle(i,j,i+t,j+t,255,255,0);
+          drawCircle(i+20,j+20,t/2,20,255,240)
         }
       };
       if((i%(t*2))>=t){
         if((j%(t*2))>=t){
-          drawRectangle(i,j,i+t,j+t,255,255,255)
+          drawRectangle(i,j,i+t,j+t,255,255,255);
+          drawCircle(i+20,j+20,t/2,20,255,60)
         }
       }
     }
