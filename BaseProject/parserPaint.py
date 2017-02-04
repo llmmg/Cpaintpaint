@@ -21,11 +21,6 @@ def p_statement(p):
     p[0] = p[1]
 
 
-def p_statement_print(p):
-    ''' statement : PRINT expression '''
-    p[0] = AST.PrintNode(p[2])
-
-
 def p_structure_for(p):
     # ''' structure : FOR expression ',' expression ',' expression '{' programme '}' '''
     # p[0] = AST.ForNode([p[2], p[4], p[6], p[8]])
