@@ -53,20 +53,6 @@ def compile(self):
     return ""
 
 
-# noeud d'affichage
-# exécute le noeud qui suit le PRINT
-# dépile un élément et l'affiche
-@addToClass(AST.PrintNode)
-def compile(self):
-    bytecode = ""
-    # bytecode += self.children[0].compile()
-    # bytecode += "PRINT\n"
-    bytecode += "print("
-    bytecode += vars(self.children[0].compile())
-
-    return bytecode
-
-
 # noeud d'opération arithmétique
 @addToClass(AST.OpNode)
 def compile(self):
