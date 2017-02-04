@@ -42,20 +42,20 @@ def p_printPixel(p):
     ''' statement : PRINTPIXEL '(' expression ',' expression ',' expression ',' expression ',' expression ')' '''
     p[0] = AST.PrintPixelNode([p[3], p[5], p[11], p[9], p[7]])
 
-
-# Line : x1, y1, x2, y2, R, G, B, thickness
+# Line
+# parameters : x1, y1, x2, y2, R, G, B, thickness
 def p_drawLine(p):
     ''' statement : DRAWLINE '(' expression ',' expression ',' expression ',' expression ',' expression ',' expression ',' expression ',' expression ')' '''
     p[0] = AST.DrawLineNode([p[3], p[5], p[7], p[9], p[15], p[13], p[11], p[17]])
 
-
+# Circle
 # parameters: x, y ,radius, r,g,b
 def p_drawCircle(p):
     ''' statement : DRAWCIRCLE '(' expression ',' expression ',' expression ',' expression ',' expression ',' expression ')' '''
     p[0] = AST.DrawCircleNode([p[3], p[5], p[7], p[13], p[11], p[9]])
 
-
-# Rectangle : x1, y1, x2, y2, R, G, B
+# Rectangle
+# parameters : x1, y1, x2, y2, R, G, B
 def p_drawRectangle(p):
     ''' statement : DRAWRECTANGLE '(' expression ',' expression ',' expression ',' expression ',' expression ',' expression ',' expression ')' '''
     p[0] = AST.DrawRectangleNode([p[3], p[5], p[7], p[9], p[15], p[13], p[11]])

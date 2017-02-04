@@ -64,10 +64,6 @@ def compile(self):
 
 
 # noeud de boucle while
-# saute au label de la condition défini plus bas
-# insère le label puis le corps du body
-# insère le label puis le corps de la condition
-# réalise un saut conditionnel sur le résultat de la condition (empilé)
 @addToClass(AST.WhileNode)
 def compile(self):
     bytecode = ""
@@ -77,6 +73,7 @@ def compile(self):
     return bytecode
 
 
+# noeud de boucle for
 @addToClass(AST.ForNode)
 def compile(self):
     bytecode = ""
@@ -88,6 +85,7 @@ def compile(self):
     return bytecode
 
 
+# condition
 @addToClass(AST.IfNode)
 def compile(self):
     bytecode = ""
@@ -258,7 +256,7 @@ if __name__ == "__main__":
 
     print("Wrote output to", name)
 
-    graph = ast.makegraphicaltree()
-    graph.write_pdf(os.path.splitext(sys.argv[1])[0] + '.pdf')
-
-    print("Wrote pdf tree to", name)
+    # graph = ast.makegraphicaltree()
+    # graph.write_pdf(os.path.splitext(sys.argv[1])[0] + '.pdf')
+    #
+    # print("Wrote pdf tree to", name)
