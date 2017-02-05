@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-img = np.zeros((512,512,3), np.uint8)
+img = np.zeros((255,255,3), np.uint8)
 img[0,127]=[0,0,255]
 img[0,127]=[0,0,255]
 img[1,127]=[0,1,254]

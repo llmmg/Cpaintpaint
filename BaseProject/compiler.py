@@ -88,6 +88,11 @@ def compile(self):
 # Noeud de la fonction printPixel
 @addToClass(AST.PrintPixelNode)
 def compile(self):
+    global sizeX
+    global sizeY
+
+    sizeX = max(sizeX, int(self.children[0].compile()))
+    sizeY = max(sizeY, int(self.children[1].compile()))
     # In opencv x and y are inversed ??
     bytecode = "img["
     bytecode += str(int(self.children[1].compile()))
@@ -107,6 +112,10 @@ def compile(self):
 # Noeud drawLine
 @addToClass(AST.DrawLineNode)
 def compile(self):
+
+    global sizeX
+    global sizeY
+
     bytecode = ""
     xi = int(self.children[1].compile())
     yi = int(self.children[0].compile())
@@ -126,6 +135,8 @@ def compile(self):
         for i in range(int(-t / 2), int(t / 2)):
             for x in range(xi, xf, 1 if ((xf - xi) > 1) else -1):
                 y = int((a * x + b))
+                sizeX = max(sizeX, y+i)
+                sizeY = max(sizeY, x)
                 bytecode += "img[" + str(x) + "," + str(y + i) + "]=[" + rc + "," + gc + "," + bc + "]\n"
 
     # si la ligne n'est pas horizontale
@@ -135,6 +146,8 @@ def compile(self):
         for i in range(int(-t / 2), int(t / 2)):
             for y in range(yi, yf, 1 if ((yf - yi) > 1) else -1):
                 x = int((a * y + b))
+                sizeX = max(sizeX, y)
+                sizeY = max(sizeY, x+i)
                 bytecode += "img[" + str(x + i) + "," + str(y) + "]=[" + rc + "," + gc + "," + bc + "]\n"
 
     return bytecode
@@ -142,6 +155,9 @@ def compile(self):
 
 @addToClass(AST.DrawRectangleNode)
 def compile(self):
+    global sizeX
+    global sizeY
+
     bytecode = ""
     xi = int(self.children[1].compile())
     yi = int(self.children[0].compile())
@@ -150,6 +166,11 @@ def compile(self):
     rc = str(int(self.children[4].compile()))
     gc = str(int(self.children[5].compile()))
     bc = str(int(self.children[6].compile()))
+
+    sizeX = max(sizeX, xi)
+    sizeX = max(sizeX, xf)
+    sizeY = max(sizeY, yi)
+    sizeY = max(sizeY, yf)
 
     # Entre la position A et B, dessine des pixels
     for i in range(xi, xf, 1 if ((xf - xi) > 1) else -1):
@@ -162,6 +183,10 @@ def compile(self):
 # Noeud drawCircle
 @addToClass(AST.DrawCircleNode)
 def compile(self):
+
+    global sizeX
+    global sizeY
+    
     bytecode = ""
     # positions et rayon
     x = int(self.children[1].compile())
@@ -178,6 +203,8 @@ def compile(self):
     for i in range(x - r, x + r):
         for j in range(y - r, y + r):
             if ((i - x) ** 2 + (j - y) ** 2) <= r ** 2:
+                sizeX = max(sizeX, j)
+                sizeY = max(sizeY, i)
                 bytecode += "img[" + str(i) + "," + str(j) + "]=[" + rc + "," + gc + "," + bc + "]\n"
 
     return bytecode
@@ -236,10 +263,12 @@ def compile(self):
     else:
         return 0
 
-
 if __name__ == "__main__":
     from parserPaint import parse
     import sys, os
+
+    sizeX = 0
+    sizeY = 0
 
     prog = open(sys.argv[1]).read()
     ast = parse(prog)
@@ -251,7 +280,7 @@ if __name__ == "__main__":
     outfile = open(name, 'w')
     outfile.write("import numpy as np\n")
     outfile.write("import cv2\n")
-    outfile.write("img = np.zeros((512,512,3), np.uint8)\n")
+    outfile.write("img = np.zeros(("+str(sizeX+1)+","+str(sizeY+1)+",3), np.uint8)\n")
 
     outfile.write(compiled)
 
