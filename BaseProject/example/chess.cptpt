@@ -1,5 +1,5 @@
 t=64;
-drawRectangle(511,511,0,0, 0,0,0);
+drawRectangle(511,511,0,0, 256,0,0);
 for(i=0, i<512, i=(i+t)){
     for(j=0, j<512, j=(j+t)){
       if((i%(t*2))<t){
