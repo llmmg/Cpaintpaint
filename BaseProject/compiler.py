@@ -12,17 +12,8 @@ operations = {
 
 vars = {}
 
-
-def whilecounter():
-    whilecounter.current += 1
-    return whilecounter.current
-
-
-whilecounter.current = 0
-
-
 # noeud de programme
-# retourne la suite d'opcodes de tous les enfants
+# Retourne les instructions des enfants
 @addToClass(AST.ProgramNode)
 def compile(self):
     bytecode = ""
@@ -32,8 +23,6 @@ def compile(self):
 
 
 # noeud terminal
-# si c'est une variable : empile la valeur de la variable
-# si c'est une constante : empile la constante
 @addToClass(AST.TokenNode)
 def compile(self):
     if isinstance(self.tok, str):
@@ -45,8 +34,7 @@ def compile(self):
 
 
 # noeud d'assignation de variable
-# exécute le noeud à droite du signe =
-# dépile un élément et le met dans ID
+# Met la valeur dans le dictionnaire des variables
 @addToClass(AST.AssignNode)
 def compile(self):
     vars[self.children[0].tok] = self.children[1].compile()
