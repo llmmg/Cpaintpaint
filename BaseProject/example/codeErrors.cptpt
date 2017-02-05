@@ -1,0 +1,9 @@
+for(i=0,i<100,i=i+10){
+	a=0;
+	printPixel(i,i,255,255,255);
+}
+j=400;
+while(j>0){
+	printPixel(j,j/2,255,10,35);
+	j=j-1;
+}
