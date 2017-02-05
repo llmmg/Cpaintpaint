@@ -128,6 +128,10 @@ def compile(self):
     gc = str(int(self.children[5].compile()))
     bc = str(int(self.children[6].compile()))
     t = int(self.children[7].compile())
+
+    # La ligne est dessiné avec l'equation cartésienne
+
+    # si la ligne n'est pas verticale
     if ((xf - xi) != 0):
         a = (yf - yi) / (xf - xi)
         b = yi - a * xi
@@ -136,6 +140,7 @@ def compile(self):
                 y = int((a * x + b))
                 bytecode += "img[" + str(x) + "," + str(y + i) + "]=[" + rc + "," + gc + "," + bc + "]\n"
 
+    # si la ligne n'est pas horizontale
     if ((yf - yi) != 0):
         a = (xf - xi) / (yf - yi)
         b = xi - a * yi
@@ -158,6 +163,7 @@ def compile(self):
     gc = str(int(self.children[5].compile()))
     bc = str(int(self.children[6].compile()))
 
+    # Entre la position A et B, dessine des pixels
     for i in range(xi, xf, 1 if ((xf - xi) > 1) else -1):
         for j in range(yi, yf, 1 if ((yf - yi) > 1) else -1):
             bytecode += "img[" + str(i) + "," + str(j) + "]=[" + rc + "," + gc + "," + bc + "]\n"
