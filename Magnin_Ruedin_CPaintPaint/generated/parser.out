@@ -1,0 +1,2454 @@
+Created by PLY version 3.9 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> programme
+Rule 1     programme -> statement
+Rule 2     programme -> statement ; programme
+Rule 3     statement -> assignation
+Rule 4     statement -> structure
+Rule 5     structure -> FOR ( assignation , expression , assignation ) { programme }
+Rule 6     structure -> WHILE expression { programme }
+Rule 7     structure -> IF expression { programme }
+Rule 8     statement -> PRINTPIXEL ( expression , expression , expression , expression , expression )
+Rule 9     statement -> DRAWLINE ( expression , expression , expression , expression , expression , expression , expression , expression )
+Rule 10    statement -> DRAWCIRCLE ( expression , expression , expression , expression , expression , expression )
+Rule 11    statement -> DRAWRECTANGLE ( expression , expression , expression , expression , expression , expression , expression )
+Rule 12    expression -> expression ADD_OP expression
+Rule 13    expression -> expression MUL_OP expression
+Rule 14    expression -> expression EQUAL expression
+Rule 15    expression -> expression NOTEQUAL expression
+Rule 16    expression -> expression < expression
+Rule 17    expression -> expression > expression
+Rule 18    expression -> expression LESSOREQUAL expression
+Rule 19    expression -> expression MOREOREQUAL expression
+Rule 20    expression -> NUMBER
+Rule 21    expression -> IDENTIFIER
+Rule 22    expression -> ( expression )
+Rule 23    expression -> ADD_OP expression
+Rule 24    assignation -> IDENTIFIER = expression
+
+Terminals, with rules where they appear
+
+(                    : 5 8 9 10 11 22
+)                    : 5 8 9 10 11 22
+,                    : 5 5 8 8 8 8 9 9 9 9 9 9 9 10 10 10 10 10 11 11 11 11 11 11
+;                    : 2
+<                    : 16
+=                    : 24
+>                    : 17
+ADD_OP               : 12 23
+DRAWCIRCLE           : 10
+DRAWLINE             : 9
+DRAWRECTANGLE        : 11
+EQUAL                : 14
+FOR                  : 5
+IDENTIFIER           : 21 24
+IF                   : 7
+LESSOREQUAL          : 18
+MOREOREQUAL          : 19
+MUL_OP               : 13
+NOTEQUAL             : 15
+NUMBER               : 20
+PRINTPIXEL           : 8
+WHILE                : 6
+error                : 
+{                    : 5 6 7
+}                    : 5 6 7
+
+Nonterminals, with rules where they appear
+
+assignation          : 3 5 5
+expression           : 5 6 7 8 8 8 8 8 9 9 9 9 9 9 9 9 10 10 10 10 10 10 11 11 11 11 11 11 11 12 12 13 13 14 14 15 15 16 16 17 17 18 18 19 19 22 23 24
+programme            : 2 5 6 7 0
+statement            : 1 2
+structure            : 4
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programme
+    (1) programme -> . statement
+    (2) programme -> . statement ; programme
+    (3) statement -> . assignation
+    (4) statement -> . structure
+    (8) statement -> . PRINTPIXEL ( expression , expression , expression , expression , expression )
+    (9) statement -> . DRAWLINE ( expression , expression , expression , expression , expression , expression , expression , expression )
+    (10) statement -> . DRAWCIRCLE ( expression , expression , expression , expression , expression , expression )
+    (11) statement -> . DRAWRECTANGLE ( expression , expression , expression , expression , expression , expression , expression )
+    (24) assignation -> . IDENTIFIER = expression
+    (5) structure -> . FOR ( assignation , expression , assignation ) { programme }
+    (6) structure -> . WHILE expression { programme }
+    (7) structure -> . IF expression { programme }
+
+    PRINTPIXEL      shift and go to state 5
+    DRAWLINE        shift and go to state 4
+    DRAWCIRCLE      shift and go to state 10
+    DRAWRECTANGLE   shift and go to state 6
+    IDENTIFIER      shift and go to state 11
+    FOR             shift and go to state 8
+    WHILE           shift and go to state 3
+    IF              shift and go to state 12
+
+    programme                      shift and go to state 1
+    structure                      shift and go to state 7
+    assignation                    shift and go to state 2
+    statement                      shift and go to state 9
+
+state 1
+
+    (0) S' -> programme .
+
+
+
+state 2
+
+    (3) statement -> assignation .
+
+    ;               reduce using rule 3 (statement -> assignation .)
+    }               reduce using rule 3 (statement -> assignation .)
+    $end            reduce using rule 3 (statement -> assignation .)
+
+
+state 3
+
+    (6) structure -> WHILE . expression { programme }
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 16
+
+state 4
+
+    (9) statement -> DRAWLINE . ( expression , expression , expression , expression , expression , expression , expression , expression )
+
+    (               shift and go to state 18
+
+
+state 5
+
+    (8) statement -> PRINTPIXEL . ( expression , expression , expression , expression , expression )
+
+    (               shift and go to state 19
+
+
+state 6
+
+    (11) statement -> DRAWRECTANGLE . ( expression , expression , expression , expression , expression , expression , expression )
+
+    (               shift and go to state 20
+
+
+state 7
+
+    (4) statement -> structure .
+
+    ;               reduce using rule 4 (statement -> structure .)
+    }               reduce using rule 4 (statement -> structure .)
+    $end            reduce using rule 4 (statement -> structure .)
+
+
+state 8
+
+    (5) structure -> FOR . ( assignation , expression , assignation ) { programme }
+
+    (               shift and go to state 21
+
+
+state 9
+
+    (1) programme -> statement .
+    (2) programme -> statement . ; programme
+
+    }               reduce using rule 1 (programme -> statement .)
+    $end            reduce using rule 1 (programme -> statement .)
+    ;               shift and go to state 22
+
+
+state 10
+
+    (10) statement -> DRAWCIRCLE . ( expression , expression , expression , expression , expression , expression )
+
+    (               shift and go to state 23
+
+
+state 11
+
+    (24) assignation -> IDENTIFIER . = expression
+
+    =               shift and go to state 24
+
+
+state 12
+
+    (7) structure -> IF . expression { programme }
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 25
+
+state 13
+
+    (22) expression -> ( . expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 26
+
+state 14
+
+    (23) expression -> ADD_OP . expression
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 27
+
+state 15
+
+    (20) expression -> NUMBER .
+
+    ,               reduce using rule 20 (expression -> NUMBER .)
+    ADD_OP          reduce using rule 20 (expression -> NUMBER .)
+    MUL_OP          reduce using rule 20 (expression -> NUMBER .)
+    EQUAL           reduce using rule 20 (expression -> NUMBER .)
+    NOTEQUAL        reduce using rule 20 (expression -> NUMBER .)
+    <               reduce using rule 20 (expression -> NUMBER .)
+    >               reduce using rule 20 (expression -> NUMBER .)
+    LESSOREQUAL     reduce using rule 20 (expression -> NUMBER .)
+    MOREOREQUAL     reduce using rule 20 (expression -> NUMBER .)
+    {               reduce using rule 20 (expression -> NUMBER .)
+    )               reduce using rule 20 (expression -> NUMBER .)
+    ;               reduce using rule 20 (expression -> NUMBER .)
+    $end            reduce using rule 20 (expression -> NUMBER .)
+    }               reduce using rule 20 (expression -> NUMBER .)
+
+
+state 16
+
+    (6) structure -> WHILE expression . { programme }
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    {               shift and go to state 36
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 17
+
+    (21) expression -> IDENTIFIER .
+
+    ,               reduce using rule 21 (expression -> IDENTIFIER .)
+    ADD_OP          reduce using rule 21 (expression -> IDENTIFIER .)
+    MUL_OP          reduce using rule 21 (expression -> IDENTIFIER .)
+    EQUAL           reduce using rule 21 (expression -> IDENTIFIER .)
+    NOTEQUAL        reduce using rule 21 (expression -> IDENTIFIER .)
+    <               reduce using rule 21 (expression -> IDENTIFIER .)
+    >               reduce using rule 21 (expression -> IDENTIFIER .)
+    LESSOREQUAL     reduce using rule 21 (expression -> IDENTIFIER .)
+    MOREOREQUAL     reduce using rule 21 (expression -> IDENTIFIER .)
+    {               reduce using rule 21 (expression -> IDENTIFIER .)
+    )               reduce using rule 21 (expression -> IDENTIFIER .)
+    ;               reduce using rule 21 (expression -> IDENTIFIER .)
+    $end            reduce using rule 21 (expression -> IDENTIFIER .)
+    }               reduce using rule 21 (expression -> IDENTIFIER .)
+
+
+state 18
+
+    (9) statement -> DRAWLINE ( . expression , expression , expression , expression , expression , expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 37
+
+state 19
+
+    (8) statement -> PRINTPIXEL ( . expression , expression , expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 38
+
+state 20
+
+    (11) statement -> DRAWRECTANGLE ( . expression , expression , expression , expression , expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 39
+
+state 21
+
+    (5) structure -> FOR ( . assignation , expression , assignation ) { programme }
+    (24) assignation -> . IDENTIFIER = expression
+
+    IDENTIFIER      shift and go to state 11
+
+    assignation                    shift and go to state 40
+
+state 22
+
+    (2) programme -> statement ; . programme
+    (1) programme -> . statement
+    (2) programme -> . statement ; programme
+    (3) statement -> . assignation
+    (4) statement -> . structure
+    (8) statement -> . PRINTPIXEL ( expression , expression , expression , expression , expression )
+    (9) statement -> . DRAWLINE ( expression , expression , expression , expression , expression , expression , expression , expression )
+    (10) statement -> . DRAWCIRCLE ( expression , expression , expression , expression , expression , expression )
+    (11) statement -> . DRAWRECTANGLE ( expression , expression , expression , expression , expression , expression , expression )
+    (24) assignation -> . IDENTIFIER = expression
+    (5) structure -> . FOR ( assignation , expression , assignation ) { programme }
+    (6) structure -> . WHILE expression { programme }
+    (7) structure -> . IF expression { programme }
+
+    PRINTPIXEL      shift and go to state 5
+    DRAWLINE        shift and go to state 4
+    DRAWCIRCLE      shift and go to state 10
+    DRAWRECTANGLE   shift and go to state 6
+    IDENTIFIER      shift and go to state 11
+    FOR             shift and go to state 8
+    WHILE           shift and go to state 3
+    IF              shift and go to state 12
+
+    programme                      shift and go to state 41
+    structure                      shift and go to state 7
+    assignation                    shift and go to state 2
+    statement                      shift and go to state 9
+
+state 23
+
+    (10) statement -> DRAWCIRCLE ( . expression , expression , expression , expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 42
+
+state 24
+
+    (24) assignation -> IDENTIFIER = . expression
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 43
+
+state 25
+
+    (7) structure -> IF expression . { programme }
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    {               shift and go to state 44
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 26
+
+    (22) expression -> ( expression . )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    )               shift and go to state 45
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 27
+
+    (23) expression -> ADD_OP expression .
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               reduce using rule 23 (expression -> ADD_OP expression .)
+    ADD_OP          reduce using rule 23 (expression -> ADD_OP expression .)
+    MUL_OP          reduce using rule 23 (expression -> ADD_OP expression .)
+    {               reduce using rule 23 (expression -> ADD_OP expression .)
+    )               reduce using rule 23 (expression -> ADD_OP expression .)
+    ;               reduce using rule 23 (expression -> ADD_OP expression .)
+    $end            reduce using rule 23 (expression -> ADD_OP expression .)
+    }               reduce using rule 23 (expression -> ADD_OP expression .)
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+  ! EQUAL           [ reduce using rule 23 (expression -> ADD_OP expression .) ]
+  ! NOTEQUAL        [ reduce using rule 23 (expression -> ADD_OP expression .) ]
+  ! <               [ reduce using rule 23 (expression -> ADD_OP expression .) ]
+  ! >               [ reduce using rule 23 (expression -> ADD_OP expression .) ]
+  ! LESSOREQUAL     [ reduce using rule 23 (expression -> ADD_OP expression .) ]
+  ! MOREOREQUAL     [ reduce using rule 23 (expression -> ADD_OP expression .) ]
+  ! ADD_OP          [ shift and go to state 32 ]
+  ! MUL_OP          [ shift and go to state 30 ]
+
+
+state 28
+
+    (16) expression -> expression < . expression
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 46
+
+state 29
+
+    (14) expression -> expression EQUAL . expression
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 47
+
+state 30
+
+    (13) expression -> expression MUL_OP . expression
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 48
+
+state 31
+
+    (18) expression -> expression LESSOREQUAL . expression
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 49
+
+state 32
+
+    (12) expression -> expression ADD_OP . expression
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 50
+
+state 33
+
+    (15) expression -> expression NOTEQUAL . expression
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 51
+
+state 34
+
+    (19) expression -> expression MOREOREQUAL . expression
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 52
+
+state 35
+
+    (17) expression -> expression > . expression
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 53
+
+state 36
+
+    (6) structure -> WHILE expression { . programme }
+    (1) programme -> . statement
+    (2) programme -> . statement ; programme
+    (3) statement -> . assignation
+    (4) statement -> . structure
+    (8) statement -> . PRINTPIXEL ( expression , expression , expression , expression , expression )
+    (9) statement -> . DRAWLINE ( expression , expression , expression , expression , expression , expression , expression , expression )
+    (10) statement -> . DRAWCIRCLE ( expression , expression , expression , expression , expression , expression )
+    (11) statement -> . DRAWRECTANGLE ( expression , expression , expression , expression , expression , expression , expression )
+    (24) assignation -> . IDENTIFIER = expression
+    (5) structure -> . FOR ( assignation , expression , assignation ) { programme }
+    (6) structure -> . WHILE expression { programme }
+    (7) structure -> . IF expression { programme }
+
+    PRINTPIXEL      shift and go to state 5
+    DRAWLINE        shift and go to state 4
+    DRAWCIRCLE      shift and go to state 10
+    DRAWRECTANGLE   shift and go to state 6
+    IDENTIFIER      shift and go to state 11
+    FOR             shift and go to state 8
+    WHILE           shift and go to state 3
+    IF              shift and go to state 12
+
+    programme                      shift and go to state 54
+    structure                      shift and go to state 7
+    assignation                    shift and go to state 2
+    statement                      shift and go to state 9
+
+state 37
+
+    (9) statement -> DRAWLINE ( expression . , expression , expression , expression , expression , expression , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 55
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 38
+
+    (8) statement -> PRINTPIXEL ( expression . , expression , expression , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 56
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 39
+
+    (11) statement -> DRAWRECTANGLE ( expression . , expression , expression , expression , expression , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 57
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 40
+
+    (5) structure -> FOR ( assignation . , expression , assignation ) { programme }
+
+    ,               shift and go to state 58
+
+
+state 41
+
+    (2) programme -> statement ; programme .
+
+    }               reduce using rule 2 (programme -> statement ; programme .)
+    $end            reduce using rule 2 (programme -> statement ; programme .)
+
+
+state 42
+
+    (10) statement -> DRAWCIRCLE ( expression . , expression , expression , expression , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 59
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 43
+
+    (24) assignation -> IDENTIFIER = expression .
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ;               reduce using rule 24 (assignation -> IDENTIFIER = expression .)
+    $end            reduce using rule 24 (assignation -> IDENTIFIER = expression .)
+    }               reduce using rule 24 (assignation -> IDENTIFIER = expression .)
+    ,               reduce using rule 24 (assignation -> IDENTIFIER = expression .)
+    )               reduce using rule 24 (assignation -> IDENTIFIER = expression .)
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 44
+
+    (7) structure -> IF expression { . programme }
+    (1) programme -> . statement
+    (2) programme -> . statement ; programme
+    (3) statement -> . assignation
+    (4) statement -> . structure
+    (8) statement -> . PRINTPIXEL ( expression , expression , expression , expression , expression )
+    (9) statement -> . DRAWLINE ( expression , expression , expression , expression , expression , expression , expression , expression )
+    (10) statement -> . DRAWCIRCLE ( expression , expression , expression , expression , expression , expression )
+    (11) statement -> . DRAWRECTANGLE ( expression , expression , expression , expression , expression , expression , expression )
+    (24) assignation -> . IDENTIFIER = expression
+    (5) structure -> . FOR ( assignation , expression , assignation ) { programme }
+    (6) structure -> . WHILE expression { programme }
+    (7) structure -> . IF expression { programme }
+
+    PRINTPIXEL      shift and go to state 5
+    DRAWLINE        shift and go to state 4
+    DRAWCIRCLE      shift and go to state 10
+    DRAWRECTANGLE   shift and go to state 6
+    IDENTIFIER      shift and go to state 11
+    FOR             shift and go to state 8
+    WHILE           shift and go to state 3
+    IF              shift and go to state 12
+
+    programme                      shift and go to state 60
+    structure                      shift and go to state 7
+    assignation                    shift and go to state 2
+    statement                      shift and go to state 9
+
+state 45
+
+    (22) expression -> ( expression ) .
+
+    ,               reduce using rule 22 (expression -> ( expression ) .)
+    ADD_OP          reduce using rule 22 (expression -> ( expression ) .)
+    MUL_OP          reduce using rule 22 (expression -> ( expression ) .)
+    EQUAL           reduce using rule 22 (expression -> ( expression ) .)
+    NOTEQUAL        reduce using rule 22 (expression -> ( expression ) .)
+    <               reduce using rule 22 (expression -> ( expression ) .)
+    >               reduce using rule 22 (expression -> ( expression ) .)
+    LESSOREQUAL     reduce using rule 22 (expression -> ( expression ) .)
+    MOREOREQUAL     reduce using rule 22 (expression -> ( expression ) .)
+    {               reduce using rule 22 (expression -> ( expression ) .)
+    )               reduce using rule 22 (expression -> ( expression ) .)
+    ;               reduce using rule 22 (expression -> ( expression ) .)
+    $end            reduce using rule 22 (expression -> ( expression ) .)
+    }               reduce using rule 22 (expression -> ( expression ) .)
+
+
+state 46
+
+    (16) expression -> expression < expression .
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               reduce using rule 16 (expression -> expression < expression .)
+    ADD_OP          reduce using rule 16 (expression -> expression < expression .)
+    MUL_OP          reduce using rule 16 (expression -> expression < expression .)
+    EQUAL           reduce using rule 16 (expression -> expression < expression .)
+    NOTEQUAL        reduce using rule 16 (expression -> expression < expression .)
+    LESSOREQUAL     reduce using rule 16 (expression -> expression < expression .)
+    MOREOREQUAL     reduce using rule 16 (expression -> expression < expression .)
+    {               reduce using rule 16 (expression -> expression < expression .)
+    )               reduce using rule 16 (expression -> expression < expression .)
+    ;               reduce using rule 16 (expression -> expression < expression .)
+    $end            reduce using rule 16 (expression -> expression < expression .)
+    }               reduce using rule 16 (expression -> expression < expression .)
+    <               shift and go to state 28
+    >               shift and go to state 35
+
+  ! <               [ reduce using rule 16 (expression -> expression < expression .) ]
+  ! >               [ reduce using rule 16 (expression -> expression < expression .) ]
+  ! ADD_OP          [ shift and go to state 32 ]
+  ! MUL_OP          [ shift and go to state 30 ]
+  ! EQUAL           [ shift and go to state 29 ]
+  ! NOTEQUAL        [ shift and go to state 33 ]
+  ! LESSOREQUAL     [ shift and go to state 31 ]
+  ! MOREOREQUAL     [ shift and go to state 34 ]
+
+
+state 47
+
+    (14) expression -> expression EQUAL expression .
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               reduce using rule 14 (expression -> expression EQUAL expression .)
+    ADD_OP          reduce using rule 14 (expression -> expression EQUAL expression .)
+    MUL_OP          reduce using rule 14 (expression -> expression EQUAL expression .)
+    {               reduce using rule 14 (expression -> expression EQUAL expression .)
+    )               reduce using rule 14 (expression -> expression EQUAL expression .)
+    ;               reduce using rule 14 (expression -> expression EQUAL expression .)
+    $end            reduce using rule 14 (expression -> expression EQUAL expression .)
+    }               reduce using rule 14 (expression -> expression EQUAL expression .)
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+  ! EQUAL           [ reduce using rule 14 (expression -> expression EQUAL expression .) ]
+  ! NOTEQUAL        [ reduce using rule 14 (expression -> expression EQUAL expression .) ]
+  ! <               [ reduce using rule 14 (expression -> expression EQUAL expression .) ]
+  ! >               [ reduce using rule 14 (expression -> expression EQUAL expression .) ]
+  ! LESSOREQUAL     [ reduce using rule 14 (expression -> expression EQUAL expression .) ]
+  ! MOREOREQUAL     [ reduce using rule 14 (expression -> expression EQUAL expression .) ]
+  ! ADD_OP          [ shift and go to state 32 ]
+  ! MUL_OP          [ shift and go to state 30 ]
+
+
+state 48
+
+    (13) expression -> expression MUL_OP expression .
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               reduce using rule 13 (expression -> expression MUL_OP expression .)
+    ADD_OP          reduce using rule 13 (expression -> expression MUL_OP expression .)
+    MUL_OP          reduce using rule 13 (expression -> expression MUL_OP expression .)
+    {               reduce using rule 13 (expression -> expression MUL_OP expression .)
+    )               reduce using rule 13 (expression -> expression MUL_OP expression .)
+    ;               reduce using rule 13 (expression -> expression MUL_OP expression .)
+    $end            reduce using rule 13 (expression -> expression MUL_OP expression .)
+    }               reduce using rule 13 (expression -> expression MUL_OP expression .)
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+  ! EQUAL           [ reduce using rule 13 (expression -> expression MUL_OP expression .) ]
+  ! NOTEQUAL        [ reduce using rule 13 (expression -> expression MUL_OP expression .) ]
+  ! <               [ reduce using rule 13 (expression -> expression MUL_OP expression .) ]
+  ! >               [ reduce using rule 13 (expression -> expression MUL_OP expression .) ]
+  ! LESSOREQUAL     [ reduce using rule 13 (expression -> expression MUL_OP expression .) ]
+  ! MOREOREQUAL     [ reduce using rule 13 (expression -> expression MUL_OP expression .) ]
+  ! ADD_OP          [ shift and go to state 32 ]
+  ! MUL_OP          [ shift and go to state 30 ]
+
+
+state 49
+
+    (18) expression -> expression LESSOREQUAL expression .
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               reduce using rule 18 (expression -> expression LESSOREQUAL expression .)
+    ADD_OP          reduce using rule 18 (expression -> expression LESSOREQUAL expression .)
+    MUL_OP          reduce using rule 18 (expression -> expression LESSOREQUAL expression .)
+    EQUAL           reduce using rule 18 (expression -> expression LESSOREQUAL expression .)
+    NOTEQUAL        reduce using rule 18 (expression -> expression LESSOREQUAL expression .)
+    {               reduce using rule 18 (expression -> expression LESSOREQUAL expression .)
+    )               reduce using rule 18 (expression -> expression LESSOREQUAL expression .)
+    ;               reduce using rule 18 (expression -> expression LESSOREQUAL expression .)
+    $end            reduce using rule 18 (expression -> expression LESSOREQUAL expression .)
+    }               reduce using rule 18 (expression -> expression LESSOREQUAL expression .)
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+  ! <               [ reduce using rule 18 (expression -> expression LESSOREQUAL expression .) ]
+  ! >               [ reduce using rule 18 (expression -> expression LESSOREQUAL expression .) ]
+  ! LESSOREQUAL     [ reduce using rule 18 (expression -> expression LESSOREQUAL expression .) ]
+  ! MOREOREQUAL     [ reduce using rule 18 (expression -> expression LESSOREQUAL expression .) ]
+  ! ADD_OP          [ shift and go to state 32 ]
+  ! MUL_OP          [ shift and go to state 30 ]
+  ! EQUAL           [ shift and go to state 29 ]
+  ! NOTEQUAL        [ shift and go to state 33 ]
+
+
+state 50
+
+    (12) expression -> expression ADD_OP expression .
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               reduce using rule 12 (expression -> expression ADD_OP expression .)
+    ADD_OP          reduce using rule 12 (expression -> expression ADD_OP expression .)
+    {               reduce using rule 12 (expression -> expression ADD_OP expression .)
+    )               reduce using rule 12 (expression -> expression ADD_OP expression .)
+    ;               reduce using rule 12 (expression -> expression ADD_OP expression .)
+    $end            reduce using rule 12 (expression -> expression ADD_OP expression .)
+    }               reduce using rule 12 (expression -> expression ADD_OP expression .)
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+  ! MUL_OP          [ reduce using rule 12 (expression -> expression ADD_OP expression .) ]
+  ! EQUAL           [ reduce using rule 12 (expression -> expression ADD_OP expression .) ]
+  ! NOTEQUAL        [ reduce using rule 12 (expression -> expression ADD_OP expression .) ]
+  ! <               [ reduce using rule 12 (expression -> expression ADD_OP expression .) ]
+  ! >               [ reduce using rule 12 (expression -> expression ADD_OP expression .) ]
+  ! LESSOREQUAL     [ reduce using rule 12 (expression -> expression ADD_OP expression .) ]
+  ! MOREOREQUAL     [ reduce using rule 12 (expression -> expression ADD_OP expression .) ]
+  ! ADD_OP          [ shift and go to state 32 ]
+
+
+state 51
+
+    (15) expression -> expression NOTEQUAL expression .
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               reduce using rule 15 (expression -> expression NOTEQUAL expression .)
+    ADD_OP          reduce using rule 15 (expression -> expression NOTEQUAL expression .)
+    MUL_OP          reduce using rule 15 (expression -> expression NOTEQUAL expression .)
+    EQUAL           reduce using rule 15 (expression -> expression NOTEQUAL expression .)
+    {               reduce using rule 15 (expression -> expression NOTEQUAL expression .)
+    )               reduce using rule 15 (expression -> expression NOTEQUAL expression .)
+    ;               reduce using rule 15 (expression -> expression NOTEQUAL expression .)
+    $end            reduce using rule 15 (expression -> expression NOTEQUAL expression .)
+    }               reduce using rule 15 (expression -> expression NOTEQUAL expression .)
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+  ! NOTEQUAL        [ reduce using rule 15 (expression -> expression NOTEQUAL expression .) ]
+  ! <               [ reduce using rule 15 (expression -> expression NOTEQUAL expression .) ]
+  ! >               [ reduce using rule 15 (expression -> expression NOTEQUAL expression .) ]
+  ! LESSOREQUAL     [ reduce using rule 15 (expression -> expression NOTEQUAL expression .) ]
+  ! MOREOREQUAL     [ reduce using rule 15 (expression -> expression NOTEQUAL expression .) ]
+  ! ADD_OP          [ shift and go to state 32 ]
+  ! MUL_OP          [ shift and go to state 30 ]
+  ! EQUAL           [ shift and go to state 29 ]
+
+
+state 52
+
+    (19) expression -> expression MOREOREQUAL expression .
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               reduce using rule 19 (expression -> expression MOREOREQUAL expression .)
+    ADD_OP          reduce using rule 19 (expression -> expression MOREOREQUAL expression .)
+    MUL_OP          reduce using rule 19 (expression -> expression MOREOREQUAL expression .)
+    EQUAL           reduce using rule 19 (expression -> expression MOREOREQUAL expression .)
+    NOTEQUAL        reduce using rule 19 (expression -> expression MOREOREQUAL expression .)
+    LESSOREQUAL     reduce using rule 19 (expression -> expression MOREOREQUAL expression .)
+    {               reduce using rule 19 (expression -> expression MOREOREQUAL expression .)
+    )               reduce using rule 19 (expression -> expression MOREOREQUAL expression .)
+    ;               reduce using rule 19 (expression -> expression MOREOREQUAL expression .)
+    $end            reduce using rule 19 (expression -> expression MOREOREQUAL expression .)
+    }               reduce using rule 19 (expression -> expression MOREOREQUAL expression .)
+    <               shift and go to state 28
+    >               shift and go to state 35
+    MOREOREQUAL     shift and go to state 34
+
+  ! <               [ reduce using rule 19 (expression -> expression MOREOREQUAL expression .) ]
+  ! >               [ reduce using rule 19 (expression -> expression MOREOREQUAL expression .) ]
+  ! MOREOREQUAL     [ reduce using rule 19 (expression -> expression MOREOREQUAL expression .) ]
+  ! ADD_OP          [ shift and go to state 32 ]
+  ! MUL_OP          [ shift and go to state 30 ]
+  ! EQUAL           [ shift and go to state 29 ]
+  ! NOTEQUAL        [ shift and go to state 33 ]
+  ! LESSOREQUAL     [ shift and go to state 31 ]
+
+
+state 53
+
+    (17) expression -> expression > expression .
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               reduce using rule 17 (expression -> expression > expression .)
+    ADD_OP          reduce using rule 17 (expression -> expression > expression .)
+    MUL_OP          reduce using rule 17 (expression -> expression > expression .)
+    EQUAL           reduce using rule 17 (expression -> expression > expression .)
+    NOTEQUAL        reduce using rule 17 (expression -> expression > expression .)
+    <               reduce using rule 17 (expression -> expression > expression .)
+    LESSOREQUAL     reduce using rule 17 (expression -> expression > expression .)
+    MOREOREQUAL     reduce using rule 17 (expression -> expression > expression .)
+    {               reduce using rule 17 (expression -> expression > expression .)
+    )               reduce using rule 17 (expression -> expression > expression .)
+    ;               reduce using rule 17 (expression -> expression > expression .)
+    $end            reduce using rule 17 (expression -> expression > expression .)
+    }               reduce using rule 17 (expression -> expression > expression .)
+    >               shift and go to state 35
+
+  ! >               [ reduce using rule 17 (expression -> expression > expression .) ]
+  ! ADD_OP          [ shift and go to state 32 ]
+  ! MUL_OP          [ shift and go to state 30 ]
+  ! EQUAL           [ shift and go to state 29 ]
+  ! NOTEQUAL        [ shift and go to state 33 ]
+  ! <               [ shift and go to state 28 ]
+  ! LESSOREQUAL     [ shift and go to state 31 ]
+  ! MOREOREQUAL     [ shift and go to state 34 ]
+
+
+state 54
+
+    (6) structure -> WHILE expression { programme . }
+
+    }               shift and go to state 61
+
+
+state 55
+
+    (9) statement -> DRAWLINE ( expression , . expression , expression , expression , expression , expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 62
+
+state 56
+
+    (8) statement -> PRINTPIXEL ( expression , . expression , expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 63
+
+state 57
+
+    (11) statement -> DRAWRECTANGLE ( expression , . expression , expression , expression , expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 64
+
+state 58
+
+    (5) structure -> FOR ( assignation , . expression , assignation ) { programme }
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 65
+
+state 59
+
+    (10) statement -> DRAWCIRCLE ( expression , . expression , expression , expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 66
+
+state 60
+
+    (7) structure -> IF expression { programme . }
+
+    }               shift and go to state 67
+
+
+state 61
+
+    (6) structure -> WHILE expression { programme } .
+
+    ;               reduce using rule 6 (structure -> WHILE expression { programme } .)
+    }               reduce using rule 6 (structure -> WHILE expression { programme } .)
+    $end            reduce using rule 6 (structure -> WHILE expression { programme } .)
+
+
+state 62
+
+    (9) statement -> DRAWLINE ( expression , expression . , expression , expression , expression , expression , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 68
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 63
+
+    (8) statement -> PRINTPIXEL ( expression , expression . , expression , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 69
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 64
+
+    (11) statement -> DRAWRECTANGLE ( expression , expression . , expression , expression , expression , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 70
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 65
+
+    (5) structure -> FOR ( assignation , expression . , assignation ) { programme }
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 71
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 66
+
+    (10) statement -> DRAWCIRCLE ( expression , expression . , expression , expression , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 72
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 67
+
+    (7) structure -> IF expression { programme } .
+
+    ;               reduce using rule 7 (structure -> IF expression { programme } .)
+    }               reduce using rule 7 (structure -> IF expression { programme } .)
+    $end            reduce using rule 7 (structure -> IF expression { programme } .)
+
+
+state 68
+
+    (9) statement -> DRAWLINE ( expression , expression , . expression , expression , expression , expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 73
+
+state 69
+
+    (8) statement -> PRINTPIXEL ( expression , expression , . expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 74
+
+state 70
+
+    (11) statement -> DRAWRECTANGLE ( expression , expression , . expression , expression , expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 75
+
+state 71
+
+    (5) structure -> FOR ( assignation , expression , . assignation ) { programme }
+    (24) assignation -> . IDENTIFIER = expression
+
+    IDENTIFIER      shift and go to state 11
+
+    assignation                    shift and go to state 76
+
+state 72
+
+    (10) statement -> DRAWCIRCLE ( expression , expression , . expression , expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 77
+
+state 73
+
+    (9) statement -> DRAWLINE ( expression , expression , expression . , expression , expression , expression , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 78
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 74
+
+    (8) statement -> PRINTPIXEL ( expression , expression , expression . , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 79
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 75
+
+    (11) statement -> DRAWRECTANGLE ( expression , expression , expression . , expression , expression , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 80
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 76
+
+    (5) structure -> FOR ( assignation , expression , assignation . ) { programme }
+
+    )               shift and go to state 81
+
+
+state 77
+
+    (10) statement -> DRAWCIRCLE ( expression , expression , expression . , expression , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 82
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 78
+
+    (9) statement -> DRAWLINE ( expression , expression , expression , . expression , expression , expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 83
+
+state 79
+
+    (8) statement -> PRINTPIXEL ( expression , expression , expression , . expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 84
+
+state 80
+
+    (11) statement -> DRAWRECTANGLE ( expression , expression , expression , . expression , expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 85
+
+state 81
+
+    (5) structure -> FOR ( assignation , expression , assignation ) . { programme }
+
+    {               shift and go to state 86
+
+
+state 82
+
+    (10) statement -> DRAWCIRCLE ( expression , expression , expression , . expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 87
+
+state 83
+
+    (9) statement -> DRAWLINE ( expression , expression , expression , expression . , expression , expression , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 88
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 84
+
+    (8) statement -> PRINTPIXEL ( expression , expression , expression , expression . , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 89
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 85
+
+    (11) statement -> DRAWRECTANGLE ( expression , expression , expression , expression . , expression , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 90
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 86
+
+    (5) structure -> FOR ( assignation , expression , assignation ) { . programme }
+    (1) programme -> . statement
+    (2) programme -> . statement ; programme
+    (3) statement -> . assignation
+    (4) statement -> . structure
+    (8) statement -> . PRINTPIXEL ( expression , expression , expression , expression , expression )
+    (9) statement -> . DRAWLINE ( expression , expression , expression , expression , expression , expression , expression , expression )
+    (10) statement -> . DRAWCIRCLE ( expression , expression , expression , expression , expression , expression )
+    (11) statement -> . DRAWRECTANGLE ( expression , expression , expression , expression , expression , expression , expression )
+    (24) assignation -> . IDENTIFIER = expression
+    (5) structure -> . FOR ( assignation , expression , assignation ) { programme }
+    (6) structure -> . WHILE expression { programme }
+    (7) structure -> . IF expression { programme }
+
+    PRINTPIXEL      shift and go to state 5
+    DRAWLINE        shift and go to state 4
+    DRAWCIRCLE      shift and go to state 10
+    DRAWRECTANGLE   shift and go to state 6
+    IDENTIFIER      shift and go to state 11
+    FOR             shift and go to state 8
+    WHILE           shift and go to state 3
+    IF              shift and go to state 12
+
+    programme                      shift and go to state 91
+    structure                      shift and go to state 7
+    assignation                    shift and go to state 2
+    statement                      shift and go to state 9
+
+state 87
+
+    (10) statement -> DRAWCIRCLE ( expression , expression , expression , expression . , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 92
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 88
+
+    (9) statement -> DRAWLINE ( expression , expression , expression , expression , . expression , expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 93
+
+state 89
+
+    (8) statement -> PRINTPIXEL ( expression , expression , expression , expression , . expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 94
+
+state 90
+
+    (11) statement -> DRAWRECTANGLE ( expression , expression , expression , expression , . expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 95
+
+state 91
+
+    (5) structure -> FOR ( assignation , expression , assignation ) { programme . }
+
+    }               shift and go to state 96
+
+
+state 92
+
+    (10) statement -> DRAWCIRCLE ( expression , expression , expression , expression , . expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 97
+
+state 93
+
+    (9) statement -> DRAWLINE ( expression , expression , expression , expression , expression . , expression , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 98
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 94
+
+    (8) statement -> PRINTPIXEL ( expression , expression , expression , expression , expression . )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    )               shift and go to state 99
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 95
+
+    (11) statement -> DRAWRECTANGLE ( expression , expression , expression , expression , expression . , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 100
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 96
+
+    (5) structure -> FOR ( assignation , expression , assignation ) { programme } .
+
+    ;               reduce using rule 5 (structure -> FOR ( assignation , expression , assignation ) { programme } .)
+    }               reduce using rule 5 (structure -> FOR ( assignation , expression , assignation ) { programme } .)
+    $end            reduce using rule 5 (structure -> FOR ( assignation , expression , assignation ) { programme } .)
+
+
+state 97
+
+    (10) statement -> DRAWCIRCLE ( expression , expression , expression , expression , expression . , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 101
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 98
+
+    (9) statement -> DRAWLINE ( expression , expression , expression , expression , expression , . expression , expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 102
+
+state 99
+
+    (8) statement -> PRINTPIXEL ( expression , expression , expression , expression , expression ) .
+
+    ;               reduce using rule 8 (statement -> PRINTPIXEL ( expression , expression , expression , expression , expression ) .)
+    }               reduce using rule 8 (statement -> PRINTPIXEL ( expression , expression , expression , expression , expression ) .)
+    $end            reduce using rule 8 (statement -> PRINTPIXEL ( expression , expression , expression , expression , expression ) .)
+
+
+state 100
+
+    (11) statement -> DRAWRECTANGLE ( expression , expression , expression , expression , expression , . expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 103
+
+state 101
+
+    (10) statement -> DRAWCIRCLE ( expression , expression , expression , expression , expression , . expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 104
+
+state 102
+
+    (9) statement -> DRAWLINE ( expression , expression , expression , expression , expression , expression . , expression , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 105
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 103
+
+    (11) statement -> DRAWRECTANGLE ( expression , expression , expression , expression , expression , expression . , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 106
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 104
+
+    (10) statement -> DRAWCIRCLE ( expression , expression , expression , expression , expression , expression . )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    )               shift and go to state 107
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 105
+
+    (9) statement -> DRAWLINE ( expression , expression , expression , expression , expression , expression , . expression , expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 108
+
+state 106
+
+    (11) statement -> DRAWRECTANGLE ( expression , expression , expression , expression , expression , expression , . expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 109
+
+state 107
+
+    (10) statement -> DRAWCIRCLE ( expression , expression , expression , expression , expression , expression ) .
+
+    ;               reduce using rule 10 (statement -> DRAWCIRCLE ( expression , expression , expression , expression , expression , expression ) .)
+    }               reduce using rule 10 (statement -> DRAWCIRCLE ( expression , expression , expression , expression , expression , expression ) .)
+    $end            reduce using rule 10 (statement -> DRAWCIRCLE ( expression , expression , expression , expression , expression , expression ) .)
+
+
+state 108
+
+    (9) statement -> DRAWLINE ( expression , expression , expression , expression , expression , expression , expression . , expression )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    ,               shift and go to state 110
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 109
+
+    (11) statement -> DRAWRECTANGLE ( expression , expression , expression , expression , expression , expression , expression . )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    )               shift and go to state 111
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 110
+
+    (9) statement -> DRAWLINE ( expression , expression , expression , expression , expression , expression , expression , . expression )
+    (12) expression -> . expression ADD_OP expression
+    (13) expression -> . expression MUL_OP expression
+    (14) expression -> . expression EQUAL expression
+    (15) expression -> . expression NOTEQUAL expression
+    (16) expression -> . expression < expression
+    (17) expression -> . expression > expression
+    (18) expression -> . expression LESSOREQUAL expression
+    (19) expression -> . expression MOREOREQUAL expression
+    (20) expression -> . NUMBER
+    (21) expression -> . IDENTIFIER
+    (22) expression -> . ( expression )
+    (23) expression -> . ADD_OP expression
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 17
+    (               shift and go to state 13
+    ADD_OP          shift and go to state 14
+
+    expression                     shift and go to state 112
+
+state 111
+
+    (11) statement -> DRAWRECTANGLE ( expression , expression , expression , expression , expression , expression , expression ) .
+
+    ;               reduce using rule 11 (statement -> DRAWRECTANGLE ( expression , expression , expression , expression , expression , expression , expression ) .)
+    }               reduce using rule 11 (statement -> DRAWRECTANGLE ( expression , expression , expression , expression , expression , expression , expression ) .)
+    $end            reduce using rule 11 (statement -> DRAWRECTANGLE ( expression , expression , expression , expression , expression , expression , expression ) .)
+
+
+state 112
+
+    (9) statement -> DRAWLINE ( expression , expression , expression , expression , expression , expression , expression , expression . )
+    (12) expression -> expression . ADD_OP expression
+    (13) expression -> expression . MUL_OP expression
+    (14) expression -> expression . EQUAL expression
+    (15) expression -> expression . NOTEQUAL expression
+    (16) expression -> expression . < expression
+    (17) expression -> expression . > expression
+    (18) expression -> expression . LESSOREQUAL expression
+    (19) expression -> expression . MOREOREQUAL expression
+
+    )               shift and go to state 113
+    ADD_OP          shift and go to state 32
+    MUL_OP          shift and go to state 30
+    EQUAL           shift and go to state 29
+    NOTEQUAL        shift and go to state 33
+    <               shift and go to state 28
+    >               shift and go to state 35
+    LESSOREQUAL     shift and go to state 31
+    MOREOREQUAL     shift and go to state 34
+
+
+state 113
+
+    (9) statement -> DRAWLINE ( expression , expression , expression , expression , expression , expression , expression , expression ) .
+
+    ;               reduce using rule 9 (statement -> DRAWLINE ( expression , expression , expression , expression , expression , expression , expression , expression ) .)
+    }               reduce using rule 9 (statement -> DRAWLINE ( expression , expression , expression , expression , expression , expression , expression , expression ) .)
+    $end            reduce using rule 9 (statement -> DRAWLINE ( expression , expression , expression , expression , expression , expression , expression , expression ) .)
+

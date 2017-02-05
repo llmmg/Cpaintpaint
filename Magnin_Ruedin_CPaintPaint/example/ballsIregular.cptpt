@@ -1,0 +1,11 @@
+
+for(i=0, i<499,i=i+1){
+	j=0;
+	while(j<i){
+		printPixel(i,j,150,10+j,200);
+		j=j+2
+	}
+};
+for(i=2, i<400, i=i+1){
+	drawCircle((i*i)%200,(i*(i+1))%400,20,200,100,i)
+}
