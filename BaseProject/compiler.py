@@ -67,7 +67,7 @@ def compile(self):
 @addToClass(AST.WhileNode)
 def compile(self):
     bytecode = ""
-
+    # Tant que la condition de la boucle while est vraie, on execute le programme
     while (self.children[0].compile() != 0):
         bytecode += str(self.children[1].compile())
     return bytecode
@@ -78,6 +78,7 @@ def compile(self):
 def compile(self):
     bytecode = ""
     self.children[0].compile()
+    # Tant que le deuxième paramètre du For est vraie, on continue le programme
     while (self.children[1].compile()):
         bytecode += str(self.children[3].compile())
         self.children[2].compile()
@@ -92,11 +93,11 @@ def compile(self):
     # if true
     if (self.children[0].compile() != 0):
         bytecode += str(self.children[1].compile())
-        # bytecode += "\n"
 
     return bytecode
 
 
+# Noeud de la fonction printPixel
 @addToClass(AST.PrintPixelNode)
 def compile(self):
     # In opencv x and y are inversed ??
@@ -115,6 +116,7 @@ def compile(self):
     return bytecode
 
 
+# Noeud drawLine
 @addToClass(AST.DrawLineNode)
 def compile(self):
     bytecode = ""
@@ -163,17 +165,22 @@ def compile(self):
     return bytecode
 
 
+# Noeud drawCircle
 @addToClass(AST.DrawCircleNode)
 def compile(self):
     bytecode = ""
+    # positions et rayon
     x = int(self.children[1].compile())
     y = int(self.children[0].compile())
     r = int(self.children[2].compile())
 
+    # couleurs
     rc = str(int(self.children[3].compile()))
     gc = str(int(self.children[4].compile()))
     bc = str(int(self.children[5].compile()))
 
+    # On regarde dans le rectangle englobant si le pixel est < ou = au rayon du cercle.
+    # Si il est dans le cercle alors on dessine le pixel sinon on saute l'instruction
     for i in range(x - r, x + r):
         for j in range(y - r, y + r):
             if ((i - x) ** 2 + (j - y) ** 2) <= r ** 2:
@@ -182,6 +189,7 @@ def compile(self):
     return bytecode
 
 
+# Egalité
 @addToClass(AST.EqualNode)
 def compile(self):
     if (self.children[0].compile() == self.children[1].compile()):
@@ -190,6 +198,7 @@ def compile(self):
         return 0
 
 
+# Inégalité
 @addToClass(AST.NotEqualNode)
 def compile(self):
     if (self.children[0].compile() == self.children[1].compile()):
@@ -198,6 +207,7 @@ def compile(self):
         return 1
 
 
+# <
 @addToClass(AST.LessNode)
 def compile(self):
     if (self.children[0].compile() < self.children[1].compile()):
@@ -206,6 +216,7 @@ def compile(self):
         return 0
 
 
+# >
 @addToClass(AST.MoreNode)
 def compile(self):
     if (self.children[0].compile() > self.children[1].compile()):
@@ -213,15 +224,17 @@ def compile(self):
     else:
         return 0
 
+
+# <=
 @addToClass(AST.LessOrEqualNode)
 def compile(self):
-
     if (self.children[0].compile() <= self.children[1].compile()):
         return 1
     else:
         return 0
 
 
+# >=
 @addToClass(AST.MoreOrEqualNode)
 def compile(self):
     if (self.children[0].compile() >= self.children[1].compile()):
