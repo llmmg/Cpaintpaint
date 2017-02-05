@@ -91,8 +91,8 @@ def compile(self):
     global sizeX
     global sizeY
 
-    sizeX = max(sizeX, int(self.children[0].compile()))
-    sizeY = max(sizeY, int(self.children[1].compile()))
+    sizeX = max(sizeX, int(self.children[1].compile()))
+    sizeY = max(sizeY, int(self.children[0].compile()))
     # In opencv x and y are inversed ??
     bytecode = "img["
     bytecode += str(int(self.children[1].compile()))
@@ -186,7 +186,7 @@ def compile(self):
 
     global sizeX
     global sizeY
-    
+
     bytecode = ""
     # positions et rayon
     x = int(self.children[1].compile())
